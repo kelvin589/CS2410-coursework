@@ -17,6 +17,7 @@
                     {{ __('You are logged in!') }}
                     <br>
                     <a href="{{ route('display_user') }}" class="btn btn-primary">Display Users</a>
+                    <a href="{{ route('display_animals') }}" class="btn btn-primary">Display Animals</a>
                 </div>
             </div>
         </div>
