@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <br>
+                    <a href="{{ route('display_user') }}" class="btn btn-primary">Display Users</a>
                 </div>
             </div>
         </div>
