@@ -14,7 +14,7 @@ class CreateAnimalsTable extends Migration
     public function up()
     {
         Schema::create('animals', function (Blueprint $table) {
-            $table->id('animal_id');
+            $table->id('id');
             $table->timestamps();
             $table->string('name');
             $table->date('date_of_birth');
@@ -22,7 +22,7 @@ class CreateAnimalsTable extends Migration
             $table->string('image', 256)->nullable();
             $table->boolean('available')->default(1);
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
