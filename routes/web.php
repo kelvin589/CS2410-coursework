@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('list', 'App\Http\Controllers\UserController@list');
+Route::get('show/{id}', 'App\Http\Controllers\UserController@show');
