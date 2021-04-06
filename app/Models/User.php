@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
     public function request()
     {
-        return $this->hasMany(Request::class, 'user_id', 'user_id');
+        return $this->hasMany(Request::class);
     }
 
     /**
@@ -24,7 +24,7 @@ class User extends Authenticatable
      */
     public function animal()
     {
-        return $this->hasMany(User::class, 'animal_id', 'animal_id');
+        return $this->hasMany(User::class);
     }
 
     /**
