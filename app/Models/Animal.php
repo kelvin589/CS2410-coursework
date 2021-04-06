@@ -14,7 +14,7 @@ class Animal extends Model
      */
     public function request()
     {
-        return $this->hasMany(Request::class, 'animal_id', 'animal_id');
+        return $this->hasMany(Request::class);
     }
 
     /**
@@ -22,6 +22,6 @@ class Animal extends Model
      */
     public function user()
     {
-        return $this->hasOne(User::class, 'user_id', 'user_id');
+        return $this->hasOne(User::class);
     }
 }

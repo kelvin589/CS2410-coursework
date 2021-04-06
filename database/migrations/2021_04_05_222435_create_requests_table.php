@@ -14,12 +14,12 @@ class CreateRequestsTable extends Migration
     public function up()
     {
         Schema::create('requests', function (Blueprint $table) {
-            $table->id('adoption_request_id');
+            $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('animal_id');
-            $table->foreign('animal_id')->references('animal_id')->on('animals');
+            $table->foreign('animal_id')->references('id')->on('animals');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->enum('adoption_status', ['approved', 'denied', 'pending'])->default('pending');
         });
     }
