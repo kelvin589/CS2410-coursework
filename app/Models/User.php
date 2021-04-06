@@ -12,6 +12,22 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Get the requests made by the user
+     */
+    public function request()
+    {
+        return $this->hasMany(Request::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * Get the animals adopted by user
+     */
+    public function animal()
+    {
+        return $this->hasMany(User::class, 'animal_id', 'animal_id');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
