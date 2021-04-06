@@ -23,3 +23,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('list', 'App\Http\Controllers\UserController@list');
 Route::get('show/{id}', 'App\Http\Controllers\UserController@show');
 Route::get('display', 'App\Http\Controllers\UserController@display')->name('display_user');
+Route::get('displayAnimals', 'App\Http\Controllers\AnimalController@listAnimals')->name('display_animal');
