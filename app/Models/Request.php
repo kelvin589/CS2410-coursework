@@ -35,4 +35,18 @@ class Request extends Model
     {
         return $query->where('adoption_status', '=', 'pending');
     }
+
+    /**
+     * Scope a query to join users and animals names.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeJoinTables($query)
+    {
+        return $query
+            ->select('users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->join('animals', 'requests.animal_id', '=', 'animals.id');
+    }
 }
