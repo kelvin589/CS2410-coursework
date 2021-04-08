@@ -28,3 +28,6 @@ Route::get('displayAvailableAnimals', 'App\Http\Controllers\AnimalController@lis
 
 use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class);
+
+use App\Http\Controllers\RequestController;
+Route::resource('requests', RequestController::class);
