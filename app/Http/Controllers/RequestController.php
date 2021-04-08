@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Request as RequestModel;
 
 class RequestController extends Controller
 {
+    /**
+     * Display a listing of the pending requests
+     */
+    public function listPending()
+    {
+        return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get()));
+    }
+
     /**
      * Display a listing of the resource.
      *
