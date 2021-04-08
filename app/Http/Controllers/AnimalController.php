@@ -40,7 +40,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        //
+        return view('animals.create');
     }
 
     /**
@@ -51,7 +51,42 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Form validation
+        $animal = $this->validate(request(), [
+            'name' => 'required|max:255',
+            'date_of_birth' => 'required|date',
+            'description' => 'sometimes|max:256',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
+        ]);
+
+        // Handle image uploading
+        if ($request->hasFile('image')) {
+            // Get filename with extension
+            $filenameWithExtension = $request->file('image')->getClientOriginalName();
+            // Just get filename
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            // Just get extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+            // Upload image
+            $path = $request->file('image')->storeAs('public/images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
+        // Create Animal object and set values from input
+        $animal = new Animal();
+        $animal->name = $request->input('name');
+        $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->description = $request->input('description');
+        $animal->image = $filenameToStore;
+
+        // Save Animal object
+        $animal->save();
+        // Generate a redirect HTTP response with success message
+        return back()->with('success', 'animal has been added');
     }
 
     /**
