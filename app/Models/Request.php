@@ -24,4 +24,15 @@ class Request extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Scope a query to only include pending requests.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePending($query)
+    {
+        return $query->where('adoption_status', '=', 'pending');
+    }
 }
