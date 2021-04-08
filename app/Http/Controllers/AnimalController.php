@@ -110,7 +110,8 @@ class AnimalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $animal = Animal::find($id);
+        return view('animals.edit', compact('animal'));
     }
 
     /**
@@ -122,8 +123,45 @@ class AnimalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        // Retrieve existing animal
+        $animal = Animal::find($id);
+
+        // Form validation
+        $this->validate(request(), [
+            'name' => 'required|max:255',
+            'date_of_birth' => 'required|date',
+            'description' => 'sometimes|max:256',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
+        ]);
+
+        // Handle image uploading
+        if ($request->hasFile('image')) {
+            // Get filename with extension
+            $filenameWithExtension = $request->file('image')->getClientOriginalName();
+            // Just get filename
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            // Just get extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+            // Upload image
+            $path = $request->file('image')->storeAs('public/images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
+        // Update the record
+        $animal->name = $request->input('name');
+        $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->description = $request->input('description');
+        $animal->image = $filenameToStore;
+
+        // Save Animal object
+        $animal->save();
+        // Generate a redirect HTTP response with success message
+        return redirect()->with('success', 'animal has been updated');
+}
 
     /**
      * Remove the specified resource from storage.
