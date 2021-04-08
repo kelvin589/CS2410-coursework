@@ -160,7 +160,7 @@ class AnimalController extends Controller
         // Save Animal object
         $animal->save();
         // Generate a redirect HTTP response with success message
-        return redirect()->with('success', 'animal has been updated');
+        return redirect('animals')->with('success', 'animal has been updated');
 }
 
     /**
