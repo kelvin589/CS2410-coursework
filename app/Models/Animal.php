@@ -24,4 +24,15 @@ class Animal extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Scope a query to only include available animals.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAvailable($query)
+    {
+        return $query->where('available', '=', 1);
+    }
 }
