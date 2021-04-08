@@ -33,7 +33,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @guest
 
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ url('animals') }}" class="nav-link">List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('animals/create') }}" class="nav-link">Create</a>
+                            </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
