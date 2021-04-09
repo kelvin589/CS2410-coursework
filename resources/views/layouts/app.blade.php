@@ -45,6 +45,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ url('requests') }}" class="nav-link">All Adoption Requests</a>
+                            </li>
                         @endguest
                     </ul>
 
