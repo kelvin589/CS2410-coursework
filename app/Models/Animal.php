@@ -37,4 +37,17 @@ class Animal extends Model
     {
         return $query->where('available', '=', 1);
     }
+
+    /**
+     * Scope a query to join user_id names (who the animal is adopted by).
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeJoinTables($query)
+    {
+        return $query
+            ->select('animals.*', 'users.name as user_name')
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id');
+    }
 }

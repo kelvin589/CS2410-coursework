@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 ">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Display all animals</div>
                 <div class="card-body">
@@ -12,6 +12,7 @@
                                 <th>Name</th>
                                 <th>Date of Birth</th>
                                 <th>Availability</th>
+                                <th>Adopted By</th>
                                 <th colspan="3">Action</th>
                             </tr>
                         </thead>
@@ -24,6 +25,11 @@
                                         <td>Available</td>
                                     @else
                                         <td>Unavailable</td>
+                                    @endif
+                                    @if($animal['user_name'])
+                                        <td>{{ $animal['user_name']}}</td>
+                                    @else
+                                        <td>Not Adopted</td>
                                     @endif
                                     <td>
                                         <a href="{{ route('animals.show', ['animal' => $animal['id']]) }}" class="btn btn-primary">Details</a>
