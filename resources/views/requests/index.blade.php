@@ -39,18 +39,8 @@
                                     <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
                                         @method('PATCH')
                                         @csrf
-                                        <input id="adoptionstatus" type="hidden" name="adoption_status" value="">
-                                        <input type="submit" class="btn btn-success" onclick="approve()" value="Approve"/>
-                                        <input type="submit" class="btn btn-danger" onclick="deny()" value="Deny"/>
-
-                                        <script>
-                                            function approve() {
-                                                document.getElementById("adoptionstatus").value = "approved";
-                                            }
-                                            function deny() {
-                                                document.getElementById("adoptionstatus").value = "denied";
-                                            }
-                                        </script>
+                                        <input type="submit" class="btn btn-success" onclick="approve()" name="submitButton" value="Approve" />
+                                        <input type="submit" class="btn btn-danger" onclick="deny()" name="submitButton" value="Deny"/>
                                     </form>
                                 </td>
                             </tr>

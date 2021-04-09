@@ -17,7 +17,15 @@ class RequestController extends Controller
 
     public function updateRequestStatus(Request $request, $id) 
     {
-        error_log($request->input('adoption_status'));
+        switch($request->submitButton) {
+            case 'Approve':
+                error_log(('Approve'));
+            break;
+
+            case 'Deny':
+                error_log('Deny');
+            break;
+        }
         return redirect('/requests/pending')->with('success', 'Status has been updated');
     }
 
