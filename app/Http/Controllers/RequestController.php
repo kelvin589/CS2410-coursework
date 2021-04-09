@@ -17,13 +17,19 @@ class RequestController extends Controller
 
     public function updateRequestStatus(Request $request, $id) 
     {
+        $adoption_request = RequestModel::find($id);
+        $animal_id = $adoption_request->animal_id;
+
+        error_log($adoption_request);
         switch($request->submitButton) {
             case 'Approve':
                 error_log(('Approve'));
+                // Update all the requests, for the same animal, to denied
             break;
 
             case 'Deny':
-                error_log('Deny');
+                $adoption_request->adoption_status = 'denied';
+                $adoption_request->save();
             break;
         }
         return redirect('/requests/pending')->with('success', 'Status has been updated');
