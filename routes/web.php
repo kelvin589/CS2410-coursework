@@ -27,6 +27,7 @@ Route::get('displayAnimals', 'App\Http\Controllers\AnimalController@listAnimals'
 Route::get('displayAvailableAnimals', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->name('display_available_animals');
 Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->name('display_pending_requests');
 
+Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->name('update_request_status');
 use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class);
 
