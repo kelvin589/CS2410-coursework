@@ -19,6 +19,10 @@
                             <th>Description</th>
                             <td style="max-width:150px;">{{ $animal->description }}</td>
                         </tr>
+                        <tr>
+                            <th>Adopted By</th>
+                            <td>{{ $username }}</td>
+                        </tr>
                         <tr> 
                             <td colspan='2'>
                                 <img style="width:100%;height:100%" src="{{ asset('storage/images/'.$animal->image)}}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use App\Models\User;
 
 class AnimalController extends Controller
 {
@@ -99,7 +100,8 @@ class AnimalController extends Controller
     public function show($id)
     {
         $animal = Animal::find($id);
-        return view('animals.show', compact('animal'));
+        $username = User::find($animal->user_id)->name ?? "Not Adopted";
+        return view('animals.show', compact('animal', 'username'));
     }
 
     /**
