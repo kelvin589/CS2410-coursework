@@ -12,7 +12,8 @@ class RequestController extends Controller
      */
     public function listPending()
     {
-        return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get()));
+        $requests = RequestModel::joinTables()->pending()->get();
+        return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get(), 'showAction' => true));
     }
 
     public function updateRequestStatus(Request $request, $id) 
@@ -47,7 +48,8 @@ class RequestController extends Controller
     public function index()
     {
         $requests = RequestModel::joinTables()->get();
-        return view('requests.index', compact('requests'));
+        $showAction = false;
+        return view('requests.index', compact('requests', 'showAction'));
     }
 
     /**
