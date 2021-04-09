@@ -30,7 +30,7 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $animals = Animal::all()->toArray();
+        $animals = Animal::joinTables()->get()->toArray();
         return view('animals.index', compact('animals'));
     }
 
