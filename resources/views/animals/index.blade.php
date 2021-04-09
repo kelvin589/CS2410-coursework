@@ -26,8 +26,8 @@
                                     @else
                                         <td>Unavailable</td>
                                     @endif
-                                    @if($animal['user_id'])
-                                        <td>{{ $animal['user_id']}}</td>
+                                    @if($animal['user_name'])
+                                        <td>{{ $animal['user_name']}}</td>
                                     @else
                                         <td>Not Adopted</td>
                                     @endif
