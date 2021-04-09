@@ -17,9 +17,9 @@ class CreateRequestsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('animal_id');
-            $table->foreign('animal_id')->references('id')->on('animals');
+            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('adoption_status', ['approved', 'denied', 'pending'])->default('pending');
         });
     }
