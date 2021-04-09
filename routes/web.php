@@ -25,6 +25,11 @@ Route::get('show/{id}', 'App\Http\Controllers\UserController@show');
 Route::get('display', 'App\Http\Controllers\UserController@display')->name('display_user');
 Route::get('displayAnimals', 'App\Http\Controllers\AnimalController@listAnimals')->name('display_animal');
 Route::get('displayAvailableAnimals', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->name('display_available_animals');
+Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->name('display_pending_requests');
 
+Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->name('update_request_status');
 use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class);
+
+use App\Http\Controllers\RequestController;
+Route::resource('requests', RequestController::class);

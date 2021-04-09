@@ -42,6 +42,9 @@
                             <li class="nav-item">
                                 <a href="{{ url('animals/create') }}" class="nav-link">Create</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>
+                            </li>
                         @endguest
                     </ul>
 
