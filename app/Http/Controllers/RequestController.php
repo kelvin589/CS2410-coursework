@@ -20,11 +20,15 @@ class RequestController extends Controller
         $adoption_request = RequestModel::find($id);
         $animal_id = $adoption_request->animal_id;
 
-        error_log($adoption_request);
         switch($request->submitButton) {
             case 'Approve':
-                error_log(('Approve'));
                 // Update all the requests, for the same animal, to denied
+                RequestModel::pending()
+                            ->animalID($animal_id)
+                            ->update(['adoption_status' => 'denied']);
+                // Update the current request record to approved
+                $adoption_request->adoption_status = 'approved';
+                $adoption_request->save();
             break;
 
             case 'Deny':
