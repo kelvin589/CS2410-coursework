@@ -46,7 +46,8 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        $requests = RequestModel::joinTables()->get();
+        return view('requests.index', compact('requests'));
     }
 
     /**
