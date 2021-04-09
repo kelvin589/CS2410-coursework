@@ -49,4 +49,15 @@ class Request extends Model
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->join('animals', 'requests.animal_id', '=', 'animals.id');
     }
+
+    /**
+     * Scope a query to only include records with a certain animal_id.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAnimalID($query, $id)
+    {
+        return $query->where('animal_id', '=', $id);
+    }
 }
