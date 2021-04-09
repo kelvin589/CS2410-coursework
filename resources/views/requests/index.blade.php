@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Pending Adoption Requests</div>
                 <div class="card-body">
@@ -11,26 +11,47 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <p>{{ \Session::get('success') }}</p>
+                    </div><br />
+                    @endif
+                    
                     <table class="table table-striped table-bordered table-hover">
                         <thead> 
                             <tr>
+                                <th>Request ID</th>
                                 <th>Username</th>
                                 <th>Animal Name</th>
                                 <th>Adoption Status</th>
-                                <th colspan="2">Action</th>
+                                <th colspan="3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach($requests as $request)
                             <tr>
+                                <td>{{ $request->id }}</td>
                                 <td>{{ $request->user_name }}</td>
                                 <td>{{ $request->animal_name }}</td>
                                 <td>{{ $request->adoption_status }}</td>
                                 <td>
-                                    <a href="" class="btn btn-success">Approve</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-danger">Deny</a>
+                                    <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
+                                        @method('PATCH')
+                                        @csrf
+                                        <input id="adoptionstatus" type="hidden" name="adoption_status" value="">
+                                        <input type="submit" class="btn btn-success" onclick="approve()" value="Approve"/>
+                                        <input type="submit" class="btn btn-danger" onclick="deny()" value="Deny"/>
+
+                                        <script>
+                                            function approve() {
+                                                document.getElementById("adoptionstatus").value = "approved";
+                                            }
+                                            function deny() {
+                                                document.getElementById("adoptionstatus").value = "denied";
+                                            }
+                                        </script>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

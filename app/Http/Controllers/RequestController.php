@@ -15,6 +15,12 @@ class RequestController extends Controller
         return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get()));
     }
 
+    public function updateRequestStatus(Request $request, $id) 
+    {
+        error_log($request->input('adoption_status'));
+        return redirect('/requests/pending')->with('success', 'Status has been updated');
+    }
+
     /**
      * Display a listing of the resource.
      *
