@@ -45,7 +45,7 @@ class Request extends Model
     public function scopeJoinTables($query)
     {
         return $query
-            ->select('users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status')
+            ->select('requests.id', 'users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->join('animals', 'requests.animal_id', '=', 'animals.id');
     }
