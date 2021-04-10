@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
+use App\Models\Animal;
+use Error;
 
 class RequestController extends Controller
 {
@@ -30,6 +32,9 @@ class RequestController extends Controller
                 // Update the current request record to approved
                 $adoption_request->adoption_status = 'approved';
                 $adoption_request->save();
+                // Update availability of animal
+                Animal::find($animal_id)
+                        ->update(['available' => '0']);
             break;
 
             case 'Deny':
