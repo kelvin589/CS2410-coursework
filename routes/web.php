@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('displayAvailableAnimals', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->name('display_available_animals');
+Route::get('animals/available', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->name('display_available_animals');
 Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->name('display_pending_requests');
 
 Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->name('update_request_status');

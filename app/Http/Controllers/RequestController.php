@@ -66,7 +66,7 @@ class RequestController extends Controller
         $request->user_id = $user_id;
         $request->save();
 
-        return redirect('/displayAvailableAnimals')->with('success', 'Animal has been adopted');
+        return redirect('/animals/available')->with('success', 'Animal has been adopted');
     }
 
     /**
