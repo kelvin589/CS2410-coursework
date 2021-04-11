@@ -28,6 +28,8 @@ Route::get('displayAvailableAnimals', 'App\Http\Controllers\AnimalController@lis
 Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->name('display_pending_requests');
 
 Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->name('update_request_status');
+Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@updateRequestAdoption')->name('request_adoption');
+
 use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class);
 

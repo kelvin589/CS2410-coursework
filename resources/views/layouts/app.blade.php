@@ -51,7 +51,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="{{ url('') }}" class="nav-link">List</a>
+                                    <a href="{{ route('display_available_animals') }}" class="nav-link">List</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('') }}" class="nav-link">All Adoption Requests</a>
