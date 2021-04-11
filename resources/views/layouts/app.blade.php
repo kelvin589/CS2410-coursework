@@ -36,7 +36,7 @@
                         @guest
 
                         @else
-                            @if(Gate::allows('admin-functionality'))
+                            @if(Gate::allows('admin_functionality'))
                                 <li class="nav-item">
                                     <a href="{{ url('animals') }}" class="nav-link">List</a>
                                 </li>

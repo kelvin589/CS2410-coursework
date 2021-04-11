@@ -31,8 +31,11 @@ class AuthServiceProvider extends ServiceProvider
 
     public function registerPolicies()
     {
-        Gate::define('admin-functionality', function($user) {
+        Gate::define('admin_functionality', function($user) {
             return $user->role;
+        });
+        Gate::define('current_user', function($user, $user_id) {
+            return $user->id === $user_id;
         });
     }
 }
