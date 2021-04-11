@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Dashboard</div>
                 <div class="card-body">
@@ -21,6 +21,7 @@
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Availability</th>
+                                <th colspan="1"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,13 @@
                                 @else
                                     <td>Unavailable</td>
                                 @endif
+                                <td>
+                                    <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data" >
+                                        @method('PATCH')
+                                        @csrf
+                                        <input type="submit" class="btn btn-success" name="submitButton" value="Request Adoption" />
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
