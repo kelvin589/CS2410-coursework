@@ -6,6 +6,17 @@
             <div class="card">
                 <div class="card-header">Display all animals</div>
                 <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('danger'))
+                        <div class="alert alert-danger">
+                            {{ session('danger') }}
+                        </div>
+                    @endif
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
