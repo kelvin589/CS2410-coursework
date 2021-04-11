@@ -39,7 +39,7 @@ class RequestController extends Controller
                         $adoption_request->save();
                         // Update availability of animal and user_id (the owner) of animal
                         Animal::find($animal_id)
-                        ->update(['available' => '0', 'user_id' => 10000]);
+                        ->update(['available' => '0', 'user_id' => $user_id]);
                     });
                 } catch(\Exception $exception) {
                     return redirect('/requests/pending')->with('failure', 'An error occured. This transaction has not been saved.');
