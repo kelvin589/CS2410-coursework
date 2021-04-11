@@ -51,7 +51,7 @@
 
                             <div class="col-md-8">
                                 <label>Image</label>
-                                <input type="file" name="image"
+                                <input type="file" accept="image/*" name="image"
                                     placeholder="Image file" />
                             </div>
 
