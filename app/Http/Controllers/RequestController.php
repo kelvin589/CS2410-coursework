@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
 use App\Models\Animal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class RequestController extends Controller
@@ -27,16 +28,18 @@ class RequestController extends Controller
 
         switch($request->submitButton) {
             case 'Approve':
-                // Update all the requests, for the same animal, to denied
-                RequestModel::pending()
-                            ->animalID($animal_id)
-                            ->update(['adoption_status' => 'denied']);
-                // Update the current request record to approved
-                $adoption_request->adoption_status = 'approved';
-                $adoption_request->save();
-                // Update availability of animal and user_id (the owner) of animal
-                Animal::find($animal_id)
-                        ->update(['available' => '0', 'user_id' => $user_id]);
+                DB::transaction(function() use($animal_id, $adoption_request, $user_id) {
+                    // Update all the requests, for the same animal, to denied
+                    RequestModel::pending()
+                    ->animalID($animal_id)
+                    ->update(['adoption_status' => 'denied']);
+                    // Update the current request record to approved
+                    $adoption_request->adoption_status = 'approved';
+                    $adoption_request->save();
+                    // Update availability of animal and user_id (the owner) of animal
+                    Animal::find($animal_id)
+                    ->update(['available' => '0', 'user_id' => $user_id]);
+                });
             break;
 
             case 'Deny':
