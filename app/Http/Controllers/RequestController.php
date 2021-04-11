@@ -16,12 +16,14 @@ class RequestController extends Controller
      */
     public function listPending()
     {
+        Gate::authorize('admin-functionality');
         $requests = RequestModel::joinTables()->pending()->get();
         return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get(), 'showAction' => true));
     }
 
     public function updateRequestStatus(Request $request, $id) 
     {
+        Gate::authorize('admin-functionality');
         $adoption_request = RequestModel::find($id);
         $animal_id = $adoption_request->animal_id;
         $user_id = $adoption_request->user_id;
@@ -59,14 +61,12 @@ class RequestController extends Controller
         $animal_id = $request->id;
         if (Auth::check()) {
             $user_id = Auth::id();
+            $request = new RequestModel();
+            $request->animal_id = $animal_id;
+            $request->user_id = $user_id;
+            $request->save();
+            return redirect('/animals/available')->with('success', 'Animal has been requested for adoption');
         }
-
-        $request = new RequestModel();
-        $request->animal_id = $animal_id;
-        $request->user_id = $user_id;
-        $request->save();
-
-        return redirect('/animals/available')->with('success', 'Animal has been adopted');
     }
 
     /**
