@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
 use App\Models\Animal;
-use Error;
+use Illuminate\Support\Facades\Auth;
 
 class RequestController extends Controller
 {
@@ -43,6 +43,21 @@ class RequestController extends Controller
             break;
         }
         return redirect('/requests/pending')->with('success', 'Status has been updated');
+    }
+
+    public function updateRequestAdoption(Request $request, $id)
+    {
+        $animal_id = $request->id;
+        if (Auth::check()) {
+            $user_id = Auth::id();
+        }
+
+        $request = new RequestModel();
+        $request->animal_id = $animal_id;
+        $request->user_id = $user_id;
+        $request->save();
+
+        return redirect('/displayAvailableAnimals')->with('success', 'Animal has been adopted');
     }
 
     /**
