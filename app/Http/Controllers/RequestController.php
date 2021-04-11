@@ -23,6 +23,7 @@ class RequestController extends Controller
     {
         $adoption_request = RequestModel::find($id);
         $animal_id = $adoption_request->animal_id;
+        $user_id = $adoption_request->user_id;
 
         switch($request->submitButton) {
             case 'Approve':
@@ -33,9 +34,9 @@ class RequestController extends Controller
                 // Update the current request record to approved
                 $adoption_request->adoption_status = 'approved';
                 $adoption_request->save();
-                // Update availability of animal
+                // Update availability of animal and user_id (the owner) of animal
                 Animal::find($animal_id)
-                        ->update(['available' => '0']);
+                        ->update(['available' => '0', 'user_id' => $user_id]);
             break;
 
             case 'Deny':
