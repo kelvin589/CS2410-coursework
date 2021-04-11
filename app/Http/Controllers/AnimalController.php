@@ -13,7 +13,7 @@ class AnimalController extends Controller
      */
     public function listAvailableAnimals()
     {
-        return view('/availableAnimals', array('animals' => Animal::available()->get()));
+        return view('animals.available', array('animals' => Animal::available()->get()));
     }
 
     /**
