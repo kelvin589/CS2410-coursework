@@ -32,18 +32,24 @@
                                 <td>{{ $animal->date_of_birth }}</td>
                                 <td>{{ $animal->description }}</td>
                                 <td>{{ $animal->image }}</td>
+                                <!-- Show different text depending on if available or not -->
                                 @if($animal->available)
                                     <td>Available</td>
                                 @else
                                     <td>Unavailable</td>
                                 @endif
-                                <td>
-                                    <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data" >
-                                        @method('PATCH')
-                                        @csrf
-                                        <input type="submit" class="btn btn-success" name="submitButton" value="Request Adoption" />
-                                    </form>
-                                </td>
+                                <!-- Only show button for animals user has not requested -->
+                                @if(App\Models\Request::animalIDUserID($animal->id, Auth::id())->exists())
+                                    <td>Requested</td>
+                                @else
+                                    <td>
+                                        <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data" >
+                                            @method('PATCH')
+                                            @csrf
+                                            <input type="submit" class="btn btn-success" name="submitButton" value="Request Adoption" />
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
