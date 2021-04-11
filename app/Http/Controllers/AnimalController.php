@@ -9,14 +9,6 @@ use App\Models\User;
 class AnimalController extends Controller
 {
     /**
-     * List all the animals
-     */
-    public function listAnimals() 
-    {
-        return view('/animals', array('animals' => Animal::all()));
-    }
-
-    /**
      * List all available animals
      */
     public function listAvailableAnimals()
