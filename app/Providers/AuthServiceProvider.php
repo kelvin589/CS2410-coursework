@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
 
     public function registerPolicies()
     {
-        Gate::define('displayall', function($user) {
+        Gate::define('admin-functionality', function($user) {
             return $user->role;
         });
     }
