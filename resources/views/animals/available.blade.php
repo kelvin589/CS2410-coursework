@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Available Animals</div>
                 <div class="card-body">
@@ -37,7 +37,9 @@
                                 <td>{{ $animal->name }}</td>
                                 <td>{{ $animal->date_of_birth }}</td>
                                 <td>{{ $animal->description }}</td>
-                                <td>{{ $animal->image }}</td>
+                                <td>
+                                    <img style="height:25%" src="{{ asset('storage/images/'.$animal->image)}}">
+                                </td>
                                 <!-- Show different text depending on if available or not -->
                                 @if($animal->available)
                                     <td>Available</td>
