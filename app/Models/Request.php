@@ -69,7 +69,7 @@ class Request extends Model
      */
     public function scopeUserID($query, $id)
     {
-        return $query->where('user_id', '=', $id);
+        return $query->where('requests.user_id', '=', $id);
     }
 
     /**

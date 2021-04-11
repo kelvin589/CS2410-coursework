@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
 use App\Models\Animal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RequestController extends Controller
 {
@@ -68,6 +69,11 @@ class RequestController extends Controller
     public function index()
     {
         $requests = RequestModel::joinTables()->get();
+        if(Gate::denies('displayall'))
+        {
+            //$requests = RequestModel::joinTables()->userID(Auth::id())->get();
+            $requests = RequestModel::userID(Auth::id())->joinTables()->get();
+        }
         $showAction = false;
         return view('requests.index', compact('requests', 'showAction'));
     }
