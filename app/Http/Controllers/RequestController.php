@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
+use App\Models\Animal;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RequestController extends Controller
 {
@@ -30,6 +33,9 @@ class RequestController extends Controller
                 // Update the current request record to approved
                 $adoption_request->adoption_status = 'approved';
                 $adoption_request->save();
+                // Update availability of animal
+                Animal::find($animal_id)
+                        ->update(['available' => '0']);
             break;
 
             case 'Deny':
@@ -40,6 +46,21 @@ class RequestController extends Controller
         return redirect('/requests/pending')->with('success', 'Status has been updated');
     }
 
+    public function updateRequestAdoption(Request $request, $id)
+    {
+        $animal_id = $request->id;
+        if (Auth::check()) {
+            $user_id = Auth::id();
+        }
+
+        $request = new RequestModel();
+        $request->animal_id = $animal_id;
+        $request->user_id = $user_id;
+        $request->save();
+
+        return redirect('/displayAvailableAnimals')->with('success', 'Animal has been adopted');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +69,11 @@ class RequestController extends Controller
     public function index()
     {
         $requests = RequestModel::joinTables()->get();
+        if(Gate::denies('displayall'))
+        {
+            //$requests = RequestModel::joinTables()->userID(Auth::id())->get();
+            $requests = RequestModel::userID(Auth::id())->joinTables()->get();
+        }
         $showAction = false;
         return view('requests.index', compact('requests', 'showAction'));
     }

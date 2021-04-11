@@ -60,4 +60,26 @@ class Request extends Model
     {
         return $query->where('animal_id', '=', $id);
     }
+
+    /**
+     * Scope a query to only include records with a certain animal_id.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserID($query, $id)
+    {
+        return $query->where('requests.user_id', '=', $id);
+    }
+
+    /**
+     * Scope a query to only include records with a certain animal_id and user_id.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAnimalIDUserID($query, $animal_id, $user_id)
+    {
+        return $query->where('animal_id', '=', $animal_id)->where('user_id', '=', $user_id);
+    }
 }
