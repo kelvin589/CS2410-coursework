@@ -9,19 +9,11 @@ use App\Models\User;
 class AnimalController extends Controller
 {
     /**
-     * List all the animals
-     */
-    public function listAnimals() 
-    {
-        return view('/animals', array('animals' => Animal::all()));
-    }
-
-    /**
      * List all available animals
      */
     public function listAvailableAnimals()
     {
-        return view('/availableAnimals', array('animals' => Animal::available()->get()));
+        return view('animals.available', array('animals' => Animal::available()->get()));
     }
 
     /**
@@ -162,7 +154,7 @@ class AnimalController extends Controller
         // Save Animal object
         $animal->save();
         // Generate a redirect HTTP response with success message
-        return redirect('animals')->with('success', 'animal has been updated');
+        return redirect('animals')->with('success', 'Animal has been updated');
 }
 
     /**
@@ -174,7 +166,8 @@ class AnimalController extends Controller
     public function destroy($id)
     {
         $animal = Animal::find($id);
+        $animal_name = $animal->name;
         $animal->delete();
-        return redirect('animals');
+        return redirect('animals')->with('danger', 'The animal, ' . $animal_name . ', has been deleted');
     }
 }
