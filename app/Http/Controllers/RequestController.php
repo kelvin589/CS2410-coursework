@@ -77,7 +77,7 @@ class RequestController extends Controller
     public function index()
     {
         $requests = RequestModel::joinTables()->get();
-        if(Gate::denies('admin_functionality'))
+        if(Gate::denies('admin-functionality'))
         {
             //$requests = RequestModel::joinTables()->userID(Auth::id())->get();
             $requests = RequestModel::userID(Auth::id())->joinTables()->get();
