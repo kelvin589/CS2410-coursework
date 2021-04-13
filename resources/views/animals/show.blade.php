@@ -7,20 +7,32 @@
             <h1 class="centre">Animal Details</h1>
             <table class="table table-striped table-bordered table-hover table-pink">
                 <tr>
-                    <th><b>Name</th>
-                    <td> {{$animal['name']}}</td>
+                    <th>ID</th>
+                    <td> {{ $animal['id'] }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td> {{ $animal['name'] }}</td>
                 </tr>
                 <tr>
                     <th>Date of Birth</th>
-                    <td>{{$animal['date_of_birth']}}</td>
+                    <td>{{ date("jS F Y", strtotime($animal['date_of_birth'])) }}</td>
                 </tr>
                 <tr>
-                    <th>Description</th>
-                    <td style="max-width:150px;">{{ $animal->description }}</td>
+                    <th>Availability</th>
+                    @if($animal['available'])
+                        <td>Available</td>
+                    @else
+                        <td>Unavailable</td>
+                    @endif
                 </tr>
                 <tr>
                     <th>Adopted By</th>
                     <td>{{ $username }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td style="width:70%;">{{ $animal['description'] }}</td>
                 </tr>
                 <tr> 
                     <td colspan='2'>

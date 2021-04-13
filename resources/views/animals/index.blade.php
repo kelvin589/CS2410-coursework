@@ -31,8 +31,8 @@
                     @foreach($animals as $animal)
                         <tr>
                             <td>{{ $animal['id'] }}</td>
-                            <td>{{ $animal['name']}}</td>
-                            <td>{{ $animal['date_of_birth']}}</td>
+                            <td>{{ $animal['name'] }}</td>
+                            <td>{{ date("jS F Y", strtotime($animal['date_of_birth'])) }}</td>
                             @if($animal['available'])
                                 <td>Available</td>
                             @else
