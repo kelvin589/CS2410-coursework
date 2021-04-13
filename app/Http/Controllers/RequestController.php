@@ -16,9 +16,12 @@ class RequestController extends Controller
      */
     public function listPending()
     {
-        Gate::authorize('admin-functionality');
         $requests = RequestModel::joinTables()->pending()->get();
-        return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get(), 'showAction' => true));
+        if(Gate::denies('admin-functionality'))
+        {
+            $requests = RequestModel::userID(Auth::id())->joinTables()->pending()->get();
+        }
+        return view('requests.pending', compact('requests'));
     }
 
     public function updateRequestStatus(Request $request, $id) 
@@ -82,29 +85,7 @@ class RequestController extends Controller
             //$requests = RequestModel::joinTables()->userID(Auth::id())->get();
             $requests = RequestModel::userID(Auth::id())->joinTables()->get();
         }
-        $showAction = false;
-        return view('requests.index', compact('requests', 'showAction'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('requests.index', compact('requests'));
     }
 
     /**
@@ -115,30 +96,17 @@ class RequestController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $requestRecord = RequestModel::find($id);
+        $request_user_id = $requestRecord->user_id;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        // Only allow admins or the user who made the request to view request details
+        if (Gate::denies('admin-functionality')) {
+            Gate::authorize('current-user', $request_user_id);
+        }
+        
+        $request_animal_id = $requestRecord->animal_id;
+        $request = RequestModel::animalIDUserID($request_animal_id, $request_user_id)->joinTables()->get()->first();
+        return view('requests.show', compact('request'));
     }
 
     /**
@@ -149,6 +117,15 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request = RequestModel::find($id);
+        $request_user_id = $request->user_id;
+
+        // Only allow admins or the user who made the request to view request details
+        if (Gate::denies('admin-functionality')) {
+            Gate::authorize('current-user', $request_user_id);
+        }
+
+        $request->delete();
+        return redirect(url()->previous())->with('success', 'The adoption request has been cancelled');
     }
 }
