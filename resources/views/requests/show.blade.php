@@ -33,7 +33,7 @@
                     <table>
                         <tr>
                             <td>
-                                <a href="{{route('requests.index')}}" class="btn btn-primary" role="button">Back to the list</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-primary" role="button">Back to the list</a>
                             </td>
                         </tr>
                     </table> 
