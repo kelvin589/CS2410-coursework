@@ -23,6 +23,11 @@
                             <th>Adoption Status</th>
                             <td>{{ $request['adoption_status'] }}</td>
                         </tr>
+                        <tr> 
+                            <td colspan='2'>
+                                <img style="width:100%;height:100%" src="{{ asset('storage/images/'.$request->image)}}">
+                            </td>
+                        </tr>
                     </table>
                     
                     <table>
