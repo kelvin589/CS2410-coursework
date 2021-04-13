@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                @if($showAction)
+                @if(Gate::allows('admin-functionality'))
                 <div class="card-header">Pending Adoption Requests</div>
                 @else
                 <div class="card-header">All Adoption Requests</div>
@@ -33,9 +33,7 @@
                                 <th>Username</th>
                                 <th>Animal Name</th>
                                 <th>Adoption Status</th>
-                                @if($showAction)
-                                    <th colspan="3">Action</th>
-                                @endif
+                                <th colspan="3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,16 +43,18 @@
                                 <td>{{ $request->user_name }}</td>
                                 <td>{{ $request->animal_name }}</td>
                                 <td>{{ $request->adoption_status }}</td>
-                                @if($showAction)
                                 <td>
                                     <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
                                         @method('PATCH')
                                         @csrf
+                                        <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-primary">Details</a>
+                                        
+                                        @if(Gate::allows('admin-functionality'))
                                         <input type="submit" class="btn btn-success" onclick="approve()" name="submitButton" value="Approve" />
                                         <input type="submit" class="btn btn-danger" onclick="deny()" name="submitButton" value="Deny"/>
+                                        @endif
                                     </form>
                                 </td>
-                                @endif
                             </tr>
                         @endforeach
                         </tbody>
