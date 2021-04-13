@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 ">
             <div class="card">
-                <div class="card-header">Display request</div>
+                <div class="card-header">Request Details</div>
                 <div class="card-body">
                     <table class="table table-striped" border="1" >
                         <tr>

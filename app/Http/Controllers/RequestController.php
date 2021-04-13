@@ -18,7 +18,7 @@ class RequestController extends Controller
     {
         Gate::authorize('admin-functionality');
         $requests = RequestModel::joinTables()->pending()->get();
-        return view('/requests/index', array('requests' => RequestModel::joinTables()->pending()->get()));
+        return view('requests.pending', array('requests' => RequestModel::joinTables()->pending()->get()));
     }
 
     public function updateRequestStatus(Request $request, $id) 
