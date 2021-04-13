@@ -1,7 +1,35 @@
-.bg-blue{
+.bg-blue {
     background-color: #83C5BE;
 }
 
-.bg-light-blue{
+.bg-light-blue {
     background-color: #EDF6F9;
+}
+
+.table-pink th {
+    background-color: #FEC5BB;
+    text-align: center;
+}
+
+.table-pink tr:nth-child(odd) td {
+    background-color: #FAE1DD;
+}
+
+.table-pink tr:nth-child(even) td {
+    background-color: #F8EDEB;
+}
+
+.table-pink tr:hover td {
+    background-color: #ffe5d9;
+}
+
+.centre {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-green {
+    background-color: #95D5B2;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
