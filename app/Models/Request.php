@@ -80,6 +80,6 @@ class Request extends Model
      */
     public function scopeAnimalIDUserID($query, $animal_id, $user_id)
     {
-        return $query->where('animal_id', '=', $animal_id)->where('user_id', '=', $user_id);
+        return $query->where('requests.animal_id', '=', $animal_id)->where('requests.user_id', '=', $user_id);
     }
 }

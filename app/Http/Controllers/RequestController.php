@@ -94,6 +94,16 @@ class RequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $requestRecord = RequestModel::find($id);
+        $request_user_id = $requestRecord->user_id;
+
+        // Only allow admins or the user who made the request to view request details
+        if (Gate::denies('admin-functionality')) {
+            Gate::authorize('current-user', $request_user_id);
+        }
+        
+        $request_animal_id = $requestRecord->animal_id;
+        $request = RequestModel::animalIDUserID($request_animal_id, $request_user_id)->joinTables()->get()->first();
+        return view('requests.show', compact('request'));
     }
 }
