@@ -30,4 +30,4 @@ use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class)->middleware('auth');
 
 use App\Http\Controllers\RequestController;
-Route::resource('requests', RequestController::class)->middleware('auth');
+Route::resource('requests', RequestController::class, ['only' => ['index', 'show']])->middleware('auth');
