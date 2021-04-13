@@ -45,7 +45,7 @@ class Request extends Model
     public function scopeJoinTables($query)
     {
         return $query
-            ->select('requests.id', 'users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status')
+            ->select('requests.id', 'users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status', 'animals.image')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->join('animals', 'requests.animal_id', '=', 'animals.id');
     }
@@ -80,6 +80,6 @@ class Request extends Model
      */
     public function scopeAnimalIDUserID($query, $animal_id, $user_id)
     {
-        return $query->where('animal_id', '=', $animal_id)->where('user_id', '=', $user_id);
+        return $query->where('requests.animal_id', '=', $animal_id)->where('requests.user_id', '=', $user_id);
     }
 }

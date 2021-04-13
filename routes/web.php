@@ -20,14 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('animals/available', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->name('display_available_animals');
-Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->name('display_pending_requests');
+Route::get('animals/available', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->middleware('auth')->name('display_available_animals');
+Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->middleware('auth')->name('display_pending_requests');
 
-Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->name('update_request_status');
-Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@updateRequestAdoption')->name('request_adoption');
+Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->middleware('auth')->name('update_request_status');
+Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@updateRequestAdoption')->middleware('auth')->name('request_adoption');
 
 use App\Http\Controllers\AnimalController;
-Route::resource('animals', AnimalController::class);
+Route::resource('animals', AnimalController::class)->middleware('auth');
 
 use App\Http\Controllers\RequestController;
-Route::resource('requests', RequestController::class);
+Route::resource('requests', RequestController::class, ['only' => ['index', 'show', 'destroy']])->middleware('auth');

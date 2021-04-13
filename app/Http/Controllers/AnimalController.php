@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class AnimalController extends Controller
 {
@@ -23,6 +24,7 @@ class AnimalController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-functionality');
         $animals = Animal::joinTables()->get()->toArray();
         return view('animals.index', compact('animals'));
     }
@@ -34,6 +36,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-functionality');
         return view('animals.create');
     }
 
@@ -45,6 +48,7 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-functionality');
         // Form validation
         $animal = $this->validate(request(), [
             'name' => 'required|max:255',
@@ -91,6 +95,7 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
         $username = User::find($animal->user_id)->name ?? "Not Adopted";
         return view('animals.show', compact('animal', 'username'));
@@ -104,6 +109,7 @@ class AnimalController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
         return view('animals.edit', compact('animal'));
     }
@@ -117,6 +123,7 @@ class AnimalController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-functionality');
         // Retrieve existing animal
         $animal = Animal::find($id);
 
@@ -165,6 +172,7 @@ class AnimalController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
         $animal_name = $animal->name;
         $animal->delete();

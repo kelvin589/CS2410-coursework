@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">All Adoption Requests</div>
+                <div class="card-header">Pending Adoption Requests</div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -40,7 +40,21 @@
                                 <td>{{ $request->animal_name }}</td>
                                 <td>{{ $request->adoption_status }}</td>
                                 <td>
-                                    <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-primary">Details</a>
+                                    <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
+                                        @method('PATCH')
+                                        @csrf
+                                        <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-primary">Details</a>
+                                        
+                                        @if(Gate::allows('admin-functionality'))
+                                        <input type="submit" class="btn btn-success" onclick="approve()" name="submitButton" value="Approve" />
+                                        <input type="submit" class="btn btn-danger" onclick="deny()" name="submitButton" value="Deny"/>
+                                        @endif
+                                    </form>
+                                    <form action="{{ action([App\Http\Controllers\RequestController::class, 'destroy'], ['request' => $request['id']]) }}" method="post">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE"> 
+                                        <button class="btn btn-danger" type="submit">Cancel</button>
+                                    </form> 
                                 </td>
                             </tr>
                         @endforeach

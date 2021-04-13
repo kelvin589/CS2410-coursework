@@ -31,7 +31,7 @@ class UserController extends Controller
     public function display()
     {
         $usersQuery = User::all();
-        if (Gate::denies('displayall')) {
+        if (Gate::denies('admin-functionality')) {
             $usersQuery = $usersQuery->where('id', auth()->user()->id);
         }
         return view('/display', array('users'=>$usersQuery));
