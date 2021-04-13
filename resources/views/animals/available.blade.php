@@ -31,8 +31,8 @@
                 @foreach($animals as $animal)
                     <tr>
                         <td>{{ $animal->name }}</td>
-                        <td>{{ $animal->date_of_birth }}</td>
-                        <td width="45%">{{ $animal->description }}</td>
+                        <td>{{ date("jS F Y", strtotime($animal->date_of_birth)) }}</td>
+                        <td width="42%">{{ $animal->description }}</td>
                         <td>
                             <img style="height:25%" src="{{ asset('storage/images/'.$animal->image)}}">
                         </td>
