@@ -26,8 +26,9 @@
                     <tr>
                         <th>Request ID</th>
                         <th>Animal Name</th>
+                        <th>Requester</th>
                         <th>Request Date</th>
-                        <th>Action</th>
+                        <th colspan="4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,19 +36,31 @@
                     <tr>
                         <td>{{ $request->id }}</td>
                         <td>{{ $request->animal_name }}</td>
+                        <td>{{ $request->user_name }}</td>
                         <td>{{ date("l jS \of F Y h:i A", strtotime($request->created_at)) }}</td>
-                        <td style="text-align: center;">
-                            <form style="float:left; padding-left:10px; padding-right:10px;" method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
+                        <td>
+                            <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-blue">Details</a>
+                        </td>
+                        @if(Gate::allows('admin-functionality'))
+                        <td>
+                            <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
                                 @method('PATCH')
                                 @csrf
-                                <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-blue">Details</a>
                                 
-                                @if(Gate::allows('admin-functionality'))
-                                    <input type="submit" class="btn btn-success" name="submitButton" value="Approve"/>
-                                    <input type="submit" class="btn btn-danger" name="submitButton" value="Deny"/>
-                                @endif
+                                <input type="submit" class="btn btn-green" name="submitButton" value="Approve"/>
                             </form>
-                            <form style="float:left; padding-left:10px; padding-right:10px; " action="{{ action([App\Http\Controllers\RequestController::class, 'destroy'], ['request' => $request['id']]) }}" method="post">
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ route('update_request_status', ['id' => $request['id']]) }}" enctype="multipart/form-data" >
+                                @method('PATCH')
+                                @csrf
+                                
+                                <input type="submit" class="btn btn-red" name="submitButton" value="Deny"/>
+                            </form>
+                        </td>
+                        @endif
+                        <td>
+                            <form action="{{ action([App\Http\Controllers\RequestController::class, 'destroy'], ['request' => $request['id']]) }}" method="post">
                                 @csrf
                                 <input name="_method" type="hidden" value="DELETE"> 
                                 <button class="btn btn-red" type="submit">Cancel</button>
