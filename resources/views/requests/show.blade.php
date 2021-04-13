@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="centre">Request Details</h1>
-            <table class="table table-striped table-pink">
+            <table class="table table-striped table-bordered table-hover table-pink">
                 <tr>
                     <th>Request ID</th>
                     <td>{{ $request['id'] }} </td>
