@@ -16,9 +16,12 @@ class RequestController extends Controller
      */
     public function listPending()
     {
-        Gate::authorize('admin-functionality');
         $requests = RequestModel::joinTables()->pending()->get();
-        return view('requests.pending', array('requests' => RequestModel::joinTables()->pending()->get()));
+        if(Gate::denies('admin-functionality'))
+        {
+            $requests = RequestModel::userID(Auth::id())->joinTables()->pending()->get();
+        }
+        return view('requests.pending', compact('requests'));
     }
 
     public function updateRequestStatus(Request $request, $id) 
@@ -104,5 +107,25 @@ class RequestController extends Controller
         $request_animal_id = $requestRecord->animal_id;
         $request = RequestModel::animalIDUserID($request_animal_id, $request_user_id)->joinTables()->get()->first();
         return view('requests.show', compact('request'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $request = RequestModel::find($id);
+        $request_user_id = $request->user_id;
+
+        // Only allow admins or the user who made the request to view request details
+        if (Gate::denies('admin-functionality')) {
+            Gate::authorize('current-user', $request_user_id);
+        }
+
+        $request->delete();
+        return redirect(url()->previous())->with('success', 'The adoption request has been cancelled');
     }
 }

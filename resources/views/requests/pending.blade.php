@@ -50,6 +50,11 @@
                                         <input type="submit" class="btn btn-danger" onclick="deny()" name="submitButton" value="Deny"/>
                                         @endif
                                     </form>
+                                    <form action="{{ action([App\Http\Controllers\RequestController::class, 'destroy'], ['request' => $request['id']]) }}" method="post">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE"> 
+                                        <button class="btn btn-danger" type="submit">Cancel</button>
+                                    </form> 
                                 </td>
                             </tr>
                         @endforeach
