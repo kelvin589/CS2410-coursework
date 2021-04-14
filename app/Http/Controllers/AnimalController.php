@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
@@ -54,6 +55,10 @@ class AnimalController extends Controller
         $animal = $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
@@ -79,6 +84,7 @@ class AnimalController extends Controller
         $animal = new Animal();
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
         $animal->image = $filenameToStore;
 
@@ -132,6 +138,10 @@ class AnimalController extends Controller
         $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
@@ -156,6 +166,7 @@ class AnimalController extends Controller
         // Update the record
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
         $animal->image = $filenameToStore;
 
