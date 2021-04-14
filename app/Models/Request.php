@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Request extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
+
+    public $sortable = ['id', 'created_at', 'updated_at', 'animal_id', 'user_id', 'adoption_status'];
 
     /**
      * Get the animal associated with the request
