@@ -40,20 +40,21 @@
                         @else
                             @if(Gate::allows('admin-functionality'))
                                 <li class="nav-item">
-                                    <a href="{{ url('animals') }}" class="nav-link">List</a>
+                                    <a href="{{ route('display_pending_requests') }}" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('animals/create') }}" class="nav-link">Create</a>
+                                    <a href="{{ url('animals') }}" class="nav-link">All Animals</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>
+                                    <a href="{{ url('animals/create') }}" class="nav-link">Add Animal</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="{{ url('requests') }}" class="nav-link">All Adoption Requests</a>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="{{ route('display_available_animals') }}" class="nav-link">List</a>
+                                    <a href="{{ route('display_available_animals') }}" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>

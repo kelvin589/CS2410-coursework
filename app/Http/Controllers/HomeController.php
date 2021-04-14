@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(FacadesGate::allows('admin-functionality')) {
+            return redirect('requests/pending');
+        }
+        return redirect()->route('display_available_animals');
     }
 }
