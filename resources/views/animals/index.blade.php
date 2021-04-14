@@ -19,10 +19,10 @@
             <table class="table table-striped table-bordered table-hover table-pink">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Date of Birth</th>
-                        <th>Availability</th>
+                        <th>@sortablelink('id', 'ID')</th>
+                        <th>@sortablelink('name', 'Name')</th>
+                        <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
+                        <th>@sortablelink('available', 'Availability')</th>
                         <th>Adopted By</th>
                         <th colspan="3">Action</th>
                     </tr>
@@ -59,6 +59,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $animals->links() }}
         </div>
     </div>
 </div>

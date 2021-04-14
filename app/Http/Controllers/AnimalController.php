@@ -26,7 +26,7 @@ class AnimalController extends Controller
     public function index()
     {
         Gate::authorize('admin-functionality');
-        $animals = Animal::joinTables()->get()->toArray();
+        $animals = Animal::joinTables()->sortable()->paginate(7);
         return view('animals.index', compact('animals'));
     }
 
