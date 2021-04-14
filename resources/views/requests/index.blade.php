@@ -24,13 +24,13 @@
             <table class="table table-striped table-bordered table-hover table-pink">
                 <thead> 
                     <tr>
-                        <th>Request ID</th>
+                        <th>@sortablelink('id', 'Request ID')</th>
                         @if(Gate::allows('admin-features'))
                         <th>Username</th>
                         @endif
                         <th>Animal Name</th>
-                        <th>Request Date</th>
-                        <th>Adoption Status</th>
+                        <th>@sortablelink('created_at', 'Request Date')</th>
+                        <th>@sortablelink('adoption_status', 'Adoption Status')</th>
                         <th colspan="3">Action</th>
                     </tr>
                 </thead>
@@ -51,6 +51,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $requests->links() }}
         </div>
     </div>
 </div>

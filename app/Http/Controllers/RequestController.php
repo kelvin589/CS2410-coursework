@@ -16,10 +16,10 @@ class RequestController extends Controller
      */
     public function listPending()
     {
-        $requests = RequestModel::joinTables()->pending()->get();
+        $requests = RequestModel::joinTables()->pending()->sortable()->paginate(7);
         if(Gate::denies('admin-functionality'))
         {
-            $requests = RequestModel::userID(Auth::id())->joinTables()->pending()->get();
+            $requests = RequestModel::userID(Auth::id())->joinTables()->pending()->sortable()->paginate(7);
         }
         return view('requests.pending', compact('requests'));
     }
@@ -79,11 +79,10 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = RequestModel::joinTables()->get();
+        $requests = RequestModel::joinTables()->sortable()->paginate(7);
         if(Gate::denies('admin-functionality'))
         {
-            //$requests = RequestModel::joinTables()->userID(Auth::id())->get();
-            $requests = RequestModel::userID(Auth::id())->joinTables()->get();
+            $requests = RequestModel::userID(Auth::id())->joinTables()->sortable()->paginate(7);
         }
         return view('requests.index', compact('requests'));
     }

@@ -24,10 +24,12 @@
             <table class="table table-striped table-bordered table-hover table-pink">
                 <thead> 
                     <tr>
-                        <th>Request ID</th>
+                        <th>@sortablelink('id', 'Request ID')</th>
                         <th>Animal Name</th>
+                        @if(Gate::allows('admin-functionality'))
                         <th>Requester</th>
-                        <th>Request Date</th>
+                        @endif
+                        <th>@sortablelink('created_at', 'Request Date')</th>
                         <th colspan="4">Action</th>
                     </tr>
                 </thead>
@@ -36,7 +38,9 @@
                     <tr>
                         <td>{{ $request->id }}</td>
                         <td>{{ $request->animal_name }}</td>
+                        @if(Gate::allows('admin-functionality'))
                         <td>{{ $request->user_name }}</td>
+                        @endif
                         <td>{{ date("l jS \of F Y h:i A", strtotime($request->created_at)) }}</td>
                         <td>
                             <a href="{{ route('requests.show', ['request' => $request['id']]) }}" class="btn btn-blue">Details</a>
@@ -70,6 +74,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $requests->links() }}
         </div>
     </div>
 </div>
