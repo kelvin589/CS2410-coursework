@@ -18,13 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/customStyles.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light-blue">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-blue shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <!-- {{ config('app.name', 'Laravel') }} -->
+                    Animal Sanctuary
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,20 +40,21 @@
                         @else
                             @if(Gate::allows('admin-functionality'))
                                 <li class="nav-item">
-                                    <a href="{{ url('animals') }}" class="nav-link">List</a>
+                                    <a href="{{ route('display_pending_requests') }}" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('animals/create') }}" class="nav-link">Create</a>
+                                    <a href="{{ url('animals') }}" class="nav-link">All Animals</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>
+                                    <a href="{{ url('animals/create') }}" class="nav-link">Add Animal</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="{{ url('requests') }}" class="nav-link">All Adoption Requests</a>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="{{ route('display_available_animals') }}" class="nav-link">List</a>
+                                    <a href="{{ route('display_available_animals') }}" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('display_pending_requests') }}" class="nav-link">Pending Adoption Requests</a>
@@ -68,14 +71,14 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li>
+                                    <a class="btn btn-yellow" href="{{ route('login') }}">{{ __('Log in') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li>
+                                    <a class="ml-4 btn btn-yellow " href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
