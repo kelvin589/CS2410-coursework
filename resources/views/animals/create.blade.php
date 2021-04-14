@@ -45,6 +45,20 @@
                         </div>
 
                         <div class="col-md-8 form-label">
+                            <label>Type</label>
+                            <br>
+                            <select name="type" id="type">
+                                <option value="" selected disabled hidden>Select the animal type</option>
+                                <option value="mammal">Mammal</option>
+                                <option value="bird">Bird</option>
+                                <option value="reptile">Reptile</option>
+                                <option value="amphibian">Amphibian</option>
+                                <option value="fish">Fish</option>
+                                <option value="invertebrate">Invertebrate</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-8 form-label">
                             <label>Description</label>
                             <br>
                             <textarea rows="4" cols="55" name="description" placeholder="Description for the animal. Max 256 characters."></textarea>

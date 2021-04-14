@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <h1 class="centre">All Animals</h1>
             @if (session('success'))
                 <div class="alert alert-success">
@@ -22,6 +22,7 @@
                         <th>@sortablelink('id', 'ID')</th>
                         <th>@sortablelink('name', 'Name')</th>
                         <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
+                        <th>Type</th>
                         <th>@sortablelink('available', 'Availability')</th>
                         <th>Adopted By</th>
                         <th colspan="3">Action</th>
@@ -33,6 +34,7 @@
                             <td>{{ $animal['id'] }}</td>
                             <td>{{ $animal['name'] }}</td>
                             <td>{{ date("jS F Y", strtotime($animal['date_of_birth'])) }}</td>
+                            <td>{{ $animal['type'] }}</td>
                             @if($animal['available'])
                                 <td>Available</td>
                             @else
