@@ -71,14 +71,14 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li>
+                                    <a class="btn btn-yellow" href="{{ route('login') }}">{{ __('Log in') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li>
+                                    <a class="ml-4 btn btn-yellow " href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
