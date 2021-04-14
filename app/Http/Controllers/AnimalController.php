@@ -14,7 +14,8 @@ class AnimalController extends Controller
      */
     public function listAvailableAnimals()
     {
-        return view('animals.available', array('animals' => Animal::available()->get()));
+        $animals = Animal::available()->sortable()->paginate(7);
+        return view('animals.available', compact('animals'));
     }
 
     /**

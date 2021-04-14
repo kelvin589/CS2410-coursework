@@ -20,8 +20,8 @@
             <table class="table table-striped table-bordered table-hover table-pink">
                 <thead> 
                     <tr>
-                        <th>Name</th>
-                        <th>Date of Birth</th>
+                        <th>@sortablelink('name', 'Name')</th>
+                        <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
                         <th>Description</th>
                         <th>Image</th>
                         <th>Action</th>
@@ -52,6 +52,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $animals->links() }}
         </div>
     </div>
 </div>
