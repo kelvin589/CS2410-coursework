@@ -53,7 +53,7 @@
                         <form action="{{ route('animals.destroy', ['animal' => $animal['id']]) }}" method="post">
                             @csrf
                             <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-red" type="submit">Delete</button>
+                            <button class="btn btn-red" type="submit" onclick="return confirm('Are you sure you want to delete {{ $animal->name }}?')">Delete</button>
                         </form>
                     </td>
                 </tr>

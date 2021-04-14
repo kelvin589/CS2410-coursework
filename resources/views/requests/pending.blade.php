@@ -67,7 +67,7 @@
                             <form action="{{ action([App\Http\Controllers\RequestController::class, 'destroy'], ['request' => $request['id']]) }}" method="post">
                                 @csrf
                                 <input name="_method" type="hidden" value="DELETE"> 
-                                <button class="btn btn-red" type="submit">Cancel</button>
+                                <button class="btn btn-red" type="submit" onclick="return confirm('Are you sure you want to cancel the adoption request for {{ $request->animal_name }}?')">Cancel</button>
                             </form> 
                         </td>
                     </tr>
