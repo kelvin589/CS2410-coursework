@@ -82,7 +82,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $animals->links() }}
+            {{ $animals->appends(\Request::except('page'))->render() }}
         </div>
     </div>
 </div>
