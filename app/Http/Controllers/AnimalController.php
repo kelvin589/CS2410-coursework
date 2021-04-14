@@ -5,17 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
+use Error;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
+    private function queryAnimalType($query, $type) {
+        $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
+
+        if (in_array($type, $types)) {
+            $query->where('type', '=', $type);
+        }
+        
+        return $query->sortable()->paginate(7);
+    }
+
     /**
      * List all available animals
      */
-    public function listAvailableAnimals()
+    public function listAvailableAnimals(Request $request)
     {
-        $animals = Animal::available()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::available(), $request->type);
         return view('animals.available', compact('animals'));
     }
 
@@ -24,10 +37,12 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin-functionality');
-        $animals = Animal::joinTables()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::joinTables(), $request->type);
         return view('animals.index', compact('animals'));
     }
 
