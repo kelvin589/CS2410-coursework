@@ -14,7 +14,8 @@ class AnimalController extends Controller
      */
     public function listAvailableAnimals()
     {
-        return view('animals.available', array('animals' => Animal::available()->get()));
+        $animals = Animal::available()->sortable()->paginate(7);
+        return view('animals.available', compact('animals'));
     }
 
     /**
@@ -25,7 +26,7 @@ class AnimalController extends Controller
     public function index()
     {
         Gate::authorize('admin-functionality');
-        $animals = Animal::joinTables()->get()->toArray();
+        $animals = Animal::joinTables()->sortable()->paginate(7);
         return view('animals.index', compact('animals'));
     }
 

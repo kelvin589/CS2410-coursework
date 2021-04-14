@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Request extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
+
+    public $sortable = ['id', 'created_at', 'updated_at', 'animal_id', 'user_id', 'adoption_status'];
 
     /**
      * Get the animal associated with the request
@@ -45,7 +48,7 @@ class Request extends Model
     public function scopeJoinTables($query)
     {
         return $query
-            ->select('requests.id', 'users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status', 'animals.image')
+            ->select('requests.id', 'users.name as user_name', 'animals.name as animal_name', 'requests.adoption_status', 'animals.image', 'requests.created_at', 'animals.description', 'animals.date_of_birth')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->join('animals', 'requests.animal_id', '=', 'animals.id');
     }

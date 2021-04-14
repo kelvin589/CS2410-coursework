@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Animal extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $fillable = ['name','date_of_birth', 'description', 'available', 'user_id'];
+    public $sortable = ['id', 'created_at', 'updated_at', 'name', 'date_of_birth', 'available', 'user_id'];
 
     /**
      * Get requests for the animal
