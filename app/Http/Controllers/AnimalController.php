@@ -119,7 +119,7 @@ class AnimalController extends Controller
     {
         Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
-        $username = User::find($animal->user_id)->name ?? "Not Adopted";
+        $username = User::find($animal->user_id)->username ?? "Not Adopted";
         return view('animals.show', compact('animal', 'username'));
     }
 
