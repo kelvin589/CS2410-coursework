@@ -25,8 +25,8 @@
                 <thead> 
                     <tr>
                         <th>@sortablelink('id', 'Request ID')</th>
-                        @if(Gate::allows('admin-features'))
-                        <th>Username</th>
+                        @if(Gate::allows('admin-functionality'))
+                        <th>Requester</th>
                         @endif
                         <th>Animal Name</th>
                         <th>@sortablelink('created_at', 'Request Date')</th>
@@ -38,7 +38,7 @@
                 @foreach($requests as $request)
                     <tr>
                         <td>{{ $request->id }}</td>
-                        @if(Gate::allows('admin-features'))
+                        @if(Gate::allows('admin-functionality'))
                         <td>{{ $request->user_name }}</td>
                         @endif
                         <td>{{ $request->animal_name }}</td>

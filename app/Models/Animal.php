@@ -49,7 +49,7 @@ class Animal extends Model
     public function scopeJoinTables($query)
     {
         return $query
-            ->select('animals.*', 'users.name as user_name')
+            ->select('animals.*', 'users.username as user_name')
             ->leftJoin('users', 'animals.user_id', '=', 'users.id');
     }
 }
