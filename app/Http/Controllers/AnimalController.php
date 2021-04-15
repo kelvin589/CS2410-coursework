@@ -11,6 +11,9 @@ use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
+    /**
+     * Return sortable query where type is the given parameter type
+     */
     private function queryAnimalType($query, $type) 
     {
         $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
@@ -22,11 +25,15 @@ class AnimalController extends Controller
         return $query->sortable()->paginate(7);
     }
 
+    /**
+     * List the animals adopted by the logged in user
+     */
     public function listUserAdoptedAnimals(Request $request) 
     {
         // Flash current input (remember old type value for setting select tag's value)
         $request->flash();
-        $animals = self::queryAnimalType(Animal::userAdopted(Auth::id()), $request->type);
+        $animals = $this->queryAnimalType(Animal::userAdopted(Auth::id()), $request->type);
+        
         return view('animals.adopted', compact('animals'));
     }
 
@@ -37,7 +44,8 @@ class AnimalController extends Controller
     {
         // Flash current input (remember old type value for setting select tag's value)
         $request->flash();
-        $animals = self::queryAnimalType(Animal::available(), $request->type);
+        $animals = $this->queryAnimalType(Animal::available(), $request->type);
+
         return view('animals.available', compact('animals'));
     }
 
@@ -51,7 +59,8 @@ class AnimalController extends Controller
         Gate::authorize('admin-functionality');
         // Flash current input (remember old type value for setting select tag's value)
         $request->flash();
-        $animals = self::queryAnimalType(Animal::joinTables(), $request->type);
+        $animals = $this->queryAnimalType(Animal::joinTables(), $request->type);
+
         return view('animals.index', compact('animals'));
     }
 
@@ -63,6 +72,7 @@ class AnimalController extends Controller
     public function create()
     {
         Gate::authorize('admin-functionality');
+
         return view('animals.create');
     }
 
@@ -120,7 +130,7 @@ class AnimalController extends Controller
         // Save Animal object
         $animal->save();
         // Generate a redirect HTTP response with success message
-        return back()->with('success', 'animal has been added');
+        return back()->with('success', 'Animal has been added.');
     }
 
     /**
@@ -133,6 +143,7 @@ class AnimalController extends Controller
     {
         $animal = Animal::find($id);
         $username = User::find($animal->user_id)->username ?? "Not Adopted";
+        
         return view('animals.show', compact('animal', 'username'));
     }
 
@@ -146,6 +157,7 @@ class AnimalController extends Controller
     {
         Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
+
         return view('animals.edit', compact('animal'));
     }
 
@@ -205,7 +217,7 @@ class AnimalController extends Controller
         // Save Animal object
         $animal->save();
         // Generate a redirect HTTP response with success message
-        return redirect('animals')->with('success', 'Animal has been updated');
+        return redirect('animals')->with('success', 'Animal has been updated.');
     }
 
     /**
@@ -220,6 +232,7 @@ class AnimalController extends Controller
         $animal = Animal::find($id);
         $animal_name = $animal->name;
         $animal->delete();
-        return redirect('animals')->with('danger', 'The animal, ' . $animal_name . ', has been deleted');
+
+        return redirect('animals')->with('danger', 'The animal, ' . $animal_name . ', has been deleted.');
     }
 }
