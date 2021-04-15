@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
-use Error;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
-    private function queryAnimalType($query, $type) {
+    private function queryAnimalType($query, $type) 
+    {
         $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
 
         if (in_array($type, $types)) {
@@ -19,6 +20,14 @@ class AnimalController extends Controller
         }
         
         return $query->sortable()->paginate(7);
+    }
+
+    public function listUserAdoptedAnimals(Request $request) 
+    {
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::userAdopted(Auth::id()), $request->type);
+        return view('animals.adopted', compact('animals'));
     }
 
     /**
