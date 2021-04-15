@@ -41,6 +41,17 @@ class Animal extends Model
     }
 
     /**
+     * Scope a query to only include animals adopted by the specified user.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserAdopted($query, $user_id)
+    {
+        return $query->where('user_id', '=', $user_id);
+    }
+
+    /**
      * Scope a query to join user_id names (who the animal is adopted by).
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
