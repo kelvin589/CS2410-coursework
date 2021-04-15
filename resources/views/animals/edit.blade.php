@@ -75,7 +75,7 @@
                             <label>Image</label>
                             <img style="width:100%;height:100%" src="{{ asset('storage/images/'.$animal->image)}}">
                             <br>
-                            <input type="file" accept="image/*" name="image" placeholder="Image file" />
+                            <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple/>
                         </div>
 
                         <div class="col-md-12 col-md-offset-4">
