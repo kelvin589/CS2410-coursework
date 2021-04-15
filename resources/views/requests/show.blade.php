@@ -2,6 +2,7 @@
 
 @section('columns', '8')
 @section('title', 'Request Details')
+@include('elements.session_alerts')
 
 @section('content')
     <h3>User Request Details</h3>
@@ -31,7 +32,7 @@
             <td>{{ $request['adoption_status'] }}</td>
         </tr>
     </table>
-
+    
     <h3>Animal Details</h3>
     <table class="table table-striped table-bordered table-hover table-pink">
         <tr>

@@ -2,6 +2,7 @@
 
 @section('columns', '11')
 @section('title', 'All Animals')
+@include('elements.session_alerts')
 
 @section('content')
     @include('elements.select_animal_type')    
@@ -43,7 +44,8 @@
                     <td>
                         <form action="{{ action([App\Http\Controllers\AnimalController::class, 'destroy'], ['animal' => $animal['id']]) }}" method="post">
                             @csrf
-                            <input name="_method" type="hidden" value="DELETE"> <button class="btn btn-red" type="submit" onclick="return confirm('Are you sure you want to delete {{ $animal->name }}?')">Delete</button>
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-red" type="submit" onclick="return confirm('Are you sure you want to delete {{ $animal->name }}?')">Delete</button>
                         </form> 
                     </td>
                 </tr>

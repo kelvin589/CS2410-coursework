@@ -34,7 +34,7 @@
 
 @if (session('failure'))
     <div class="alert alert-danger">
-        <p>{{ \Session::get('failure') }}</p>
+        <p>{{ session('failure') }}</p>
     </div>
     <br />
 @endif

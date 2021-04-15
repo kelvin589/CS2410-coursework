@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
 @section('columns', '12')
-
 @section('title', 'Available Animals')
+@include('elements.session_alerts')
+
+@section('content')
     @include('elements.select_animal_type')
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
@@ -30,7 +31,7 @@
                     <td>Requested</td>
                 @else
                     <td>
-                        <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data" >
+                        <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
                             <input type="submit" class="btn btn-green" name="submitButton" value="Request Adoption" />

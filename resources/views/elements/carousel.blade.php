@@ -2,12 +2,12 @@
     <div class="carousel-inner">
         <!-- There must be one active carousel item -->
         <div class="carousel-item active" style="height:360px;">
-            <img class="d-block w-100" src="{{ asset('storage/images/noimage.jpg') }}" alt="noimage.jpg">
+            <img class="d-block w-100" src="{{ asset('storage/images/noimage.jpg') }}" alt="noimage.jpg" />
         </div>
         @foreach(explode("|", $item->image) as $image)
-        <div class="carousel-item " style="height:360px;">
-            <img class="d-block w-100" src="{{ asset('storage/images/'.$image) }}" alt="{{ $image }}">
-        </div>
+            <div class="carousel-item " style="height:360px;">
+                <img class="d-block w-100" src="{{ asset('storage/images/'.$image) }}" alt="{{ $image }}" />
+            </div>
         @endforeach
     </div>
     <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">

@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
 @section('columns', '8')
-
 @section('title', 'Adopted Animals')
+@include('elements.session_alerts')
+
+@section('content')
     @include('elements.select_animal_type')
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
