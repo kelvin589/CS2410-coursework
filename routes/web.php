@@ -24,7 +24,7 @@ Route::get('animals/available', 'App\Http\Controllers\AnimalController@listAvail
 Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->middleware('auth')->name('display_pending_requests');
 
 Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->middleware('auth')->name('update_request_status');
-Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@updateRequestAdoption')->middleware('auth')->name('request_adoption');
+Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@addAdoptionRequest')->middleware('auth')->name('request_adoption');
 Route::get('/animals/adopted', 'App\Http\Controllers\AnimalController@listUserAdoptedAnimals')->middleware('auth')->name('display_user_adopted_animals');
 
 use App\Http\Controllers\AnimalController;
