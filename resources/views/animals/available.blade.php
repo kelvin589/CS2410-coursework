@@ -45,8 +45,7 @@
                         <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
                         <th>Description</th>
                         <th>Type</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,7 +56,7 @@
                         <td width="42%">{{ $animal->description }}</td>
                         <td>{{ $animal->type }}</td>
                         <td>
-                            <img style="height:25%" src="{{ asset('storage/images/'.$animal->image)}}">
+                            <a href="{{ route('animals.show', ['animal' => $animal['id']]) }}" class="btn btn-blue">Details</a>
                         </td>
                         <!-- Only show button for animals user has not requested -->
                         @if(App\Models\Request::animalIDUserID($animal->id, Auth::id())->exists())

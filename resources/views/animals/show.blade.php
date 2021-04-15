@@ -22,6 +22,7 @@
                     <th>Type</th>
                     <td>{{ $animal['type'] }}</td>
                 </tr>
+                @if(Gate::allows('admin-functionality'))
                 <tr>
                     <th>Availability</th>
                     @if($animal['available'])
@@ -34,6 +35,7 @@
                     <th>Adopted By</th>
                     <td>{{ $username }}</td>
                 </tr>
+                @endif
                 <tr>
                     <th>Description</th>
                     <td style="width:70%;">{{ $animal['description'] }}</td>
@@ -48,8 +50,9 @@
             <table>
                 <tr>
                     <td>
-                        <a href="{{ route('animals.index') }}" class="btn btn-pink" role="button">Back to the list</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-pink" role="button">Back to the list</a>
                     </td>
+                    @if(Gate::allows('admin-functionality'))
                     <td style="padding-left:10px;">
                         <a  href="{{ route('animals.edit', ['animal' => $animal['id']]) }}" class="btn btn-yellow">Edit</a>
                     </td>
@@ -60,6 +63,7 @@
                             <button class="btn btn-red" type="submit" onclick="return confirm('Are you sure you want to delete {{ $animal->name }}?')">Delete</button>
                         </form>
                     </td>
+                    @endif
                 </tr>
             </table> 
         </div>

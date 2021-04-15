@@ -126,7 +126,6 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-        Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
         $username = User::find($animal->user_id)->username ?? "Not Adopted";
         return view('animals.show', compact('animal', 'username'));
