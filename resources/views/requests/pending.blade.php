@@ -3,23 +3,7 @@
 @section('columns', '10')
 @section('title', 'Pending Adoption Requests')
 
-@section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div><br />
-    @elseif (session('failure'))
-        <div class="alert alert-danger">
-            <p>{{ \Session::get('failure') }}</p>
-        </div><br />
-    @endif
-    
+@section('content')    
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
             <tr>

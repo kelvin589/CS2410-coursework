@@ -114,6 +114,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-@yield('columns')">
                         <h1 class="centre">@yield('title')</h1>
+                        @include('elements.session_alerts')
                         @yield('content')
                     </div>
                 </div>

@@ -6,26 +6,6 @@
 
 <!-- define the content section -->
 @section('content')
-    <!-- Display the errors -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li> 
-                @endforeach
-            </ul>
-        </div>
-        <br />
-    @endif
-
-    <!-- Display the success status -->
-    @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div>
-        <br />
-    @endif
-
     <div style="background-color:#FCD5CE" class="card">
         <!-- Define the form -->
         <div class="card-body">

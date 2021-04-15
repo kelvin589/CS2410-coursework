@@ -4,18 +4,6 @@
 @section('columns', '8')
 
 @section('title', 'Adopted Animals')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div><br />
-    @endif
-
     <div>
         <form>
             <!-- Select does not have a value attribute. Must programatically change the value show. -->

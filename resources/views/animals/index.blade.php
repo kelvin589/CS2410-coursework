@@ -4,17 +4,6 @@
 @section('title', 'All Animals')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('danger'))
-        <div class="alert alert-danger">
-            {{ session('danger') }}
-        </div>
-    @endif
-
     <div>
         <form>
             <!-- Select does not have a value attribute. Must programatically change the value show. -->
