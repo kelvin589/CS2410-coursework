@@ -2,9 +2,9 @@
 
 @section('columns', '8')
 @section('title', 'Animal Details')
-@include('elements.session_alerts')
 
 @section('content')
+    @include('elements.session_alerts')
     <table class="table table-striped table-bordered table-hover table-pink">
         <tr>
             <th>ID</th>

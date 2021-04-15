@@ -3,10 +3,10 @@
 
 @section('columns', '6')
 @section('title', 'Add Animal')
-@include('elements.session_alerts')
 
 <!-- define the content section -->
 @section('content')
+    @include('elements.session_alerts')
     <div style="background-color:#FCD5CE" class="card">
         <!-- Define the form -->
         <div class="card-body">

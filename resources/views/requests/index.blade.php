@@ -2,9 +2,9 @@
 
 @section('columns', '10')
 @section('title', 'All Adoption Requests')
-@include('elements.session_alerts')
 
 @section('content')    
+    @include('elements.session_alerts')
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
             <tr>
