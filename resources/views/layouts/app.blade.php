@@ -63,6 +63,9 @@
                                 <li class="nav-item">
                                     <a href="{{ url('requests') }}" class="nav-link">All Adoption Requests</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('display_user_adopted_animals') }}" class="nav-link">Adopted Animals</a>
+                                </li>
                             @endif
                         @endguest
                     </ul>
