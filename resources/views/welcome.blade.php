@@ -53,7 +53,7 @@
             <main class="py-4">
                 <h1 class="centre">Animal Sanctuary</h1>
                 <h2 class="centre">Welcome to the animal sanctuary. We hope you enjoy.</h2>
-                <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;"src="https://upload.wikimedia.org/wikipedia/commons/e/e2/FarmSanctuary.JPG" alt="">          
+                <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;"src="https://upload.wikimedia.org/wikipedia/commons/e/e2/FarmSanctuary.JPG" alt="" />          
             </main>
         </div>
     </body>
