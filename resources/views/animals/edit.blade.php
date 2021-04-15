@@ -71,11 +71,31 @@
                             <textarea rows="4" cols="55" name="description" placeholder="Description for the animal. Max 256 characters.">{{ $animal->description }}</textarea>
                         </div>
 
-                        <div style="margin-bottom:10px;" class="col-md-8 form-label">
+                        <div style="margin-bottom:10px;" class="col-md-12 form-label">
                             <label>Image</label>
-                            <img style="width:100%;height:100%" src="{{ asset('storage/images/'.$animal->image)}}">
                             <br>
-                            <input type="file" accept="image/*" name="image" placeholder="Image file" />
+                            <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple/>
+                            <div id="imageCarousel" class="carousel slide" data-interval="false">
+                                <div class="carousel-inner">
+                                    <!-- There must be one active carousel item -->
+                                    <div class="carousel-item active" style="height:360px;">
+                                        <img class="d-block w-100" src="{{ asset('storage/images/noimage.jpg') }}" alt="noimage.jpg">
+                                    </div>
+                                    @foreach(explode("|", $animal->image) as $image)
+                                    <div class="carousel-item " style="height:360px;">
+                                        <img class="d-block w-100" src="{{ asset('storage/images/'.$image) }}" alt="{{ $image }}">
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
 
                         <div class="col-md-12 col-md-offset-4">

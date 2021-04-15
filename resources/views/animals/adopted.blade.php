@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <h1 class="centre">Adopted Animals</h1>
             @if (session('status'))
                 <div class="alert alert-success">
@@ -43,9 +43,8 @@
                     <tr>
                         <th>@sortablelink('name', 'Name')</th>
                         <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
-                        <th>Description</th>
                         <th>Type</th>
-                        <th>Image</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,10 +52,9 @@
                     <tr>
                         <td>{{ $animal->name }}</td>
                         <td>{{ date("jS F Y", strtotime($animal->date_of_birth)) }}</td>
-                        <td width="42%">{{ $animal->description }}</td>
                         <td>{{ $animal->type }}</td>
                         <td>
-                            <img style="height:25%" src="{{ asset('storage/images/'.$animal->image)}}">
+                            <a href="{{ route('animals.show', ['animal' => $animal['id']]) }}" class="btn btn-blue">Details</a>
                         </td>
                     </tr>
                 @endforeach

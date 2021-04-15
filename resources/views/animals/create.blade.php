@@ -67,7 +67,7 @@
                         <div style="margin-bottom:10px;" class="col-md-8 form-label">
                             <label>Image</label>
                             <br>
-                            <input type="file" accept="image/*" name="image" placeholder="Image file"/>
+                            <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple/>
                         </div>
 
                         <div class="col-md-12 col-md-offset-4">
