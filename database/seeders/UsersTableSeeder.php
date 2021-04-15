@@ -20,11 +20,13 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
         foreach(range(1, 10) as $index) 
         {
-            $firstName = $faker->firstName();
-            $lastName = $faker->lastName();
+            $forename = $faker->firstName();
+            $surname = $faker->lastName();
             DB::table('users')->insert([
-                'name'=>$firstName,
-                'email'=>$firstName.'@'.$lastName.'.com',
+                'username'=>$faker->userName,
+                'forename'=>$forename,
+                'surname'=>$surname,
+                'email'=>$forename.'@'.$surname.'.com',
                 'password'=>Hash::make("12345678"),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
