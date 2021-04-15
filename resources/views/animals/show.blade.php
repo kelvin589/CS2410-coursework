@@ -19,6 +19,10 @@
                     <td>{{ date("jS F Y", strtotime($animal['date_of_birth'])) }}</td>
                 </tr>
                 <tr>
+                    <th>Type</th>
+                    <td>{{ $animal['type'] }}</td>
+                </tr>
+                <tr>
                     <th>Availability</th>
                     @if($animal['available'])
                         <td>Available</td>

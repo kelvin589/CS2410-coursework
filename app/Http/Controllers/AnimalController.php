@@ -5,16 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
+use Error;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
+    private function queryAnimalType($query, $type) {
+        $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
+
+        if (in_array($type, $types)) {
+            $query->where('type', '=', $type);
+        }
+        
+        return $query->sortable()->paginate(7);
+    }
+
     /**
      * List all available animals
      */
-    public function listAvailableAnimals()
+    public function listAvailableAnimals(Request $request)
     {
-        $animals = Animal::available()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::available(), $request->type);
         return view('animals.available', compact('animals'));
     }
 
@@ -23,10 +37,12 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin-functionality');
-        $animals = Animal::joinTables()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::joinTables(), $request->type);
         return view('animals.index', compact('animals'));
     }
 
@@ -54,6 +70,10 @@ class AnimalController extends Controller
         $animal = $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
@@ -79,6 +99,7 @@ class AnimalController extends Controller
         $animal = new Animal();
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
         $animal->image = $filenameToStore;
 
@@ -132,6 +153,10 @@ class AnimalController extends Controller
         $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
@@ -156,6 +181,7 @@ class AnimalController extends Controller
         // Update the record
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
         $animal->image = $filenameToStore;
 

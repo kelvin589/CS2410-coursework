@@ -10,6 +10,14 @@
                     <td>{{ $request['id'] }} </td>
                 </tr>
                 <tr>
+                    <th>Animal ID</th>
+                    <td>{{ $request['animal_id'] }} </td>
+                </tr>
+                <tr>
+                    <th><b>User ID</th>
+                    <td>{{ $request['user_id'] }}</td>
+                </tr>
+                <tr>
                     <th><b>Username</th>
                     <td>{{ $request['user_name'] }}</td>
                 </tr>
@@ -24,6 +32,10 @@
                 <tr>
                     <th>Animal Name</th>
                     <td>{{ $request['animal_name'] }}</td>
+                </tr>
+                <tr>
+                    <th>Animal Type</th>
+                    <td>{{ $request['type'] }}</td>
                 </tr>
                 <tr>
                     <th>Description</th>

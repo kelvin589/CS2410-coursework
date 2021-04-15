@@ -46,6 +46,26 @@
                         </div>
 
                         <div class="col-md-8 form-label">
+                            <label>Type</label>
+                            <br>
+                            <!-- Select does not have a value attribute. Must programatically change the value show. -->
+                            @php
+                                function checkType($selected_type, $animal_type) {
+                                    return $selected_type==$animal_type->type ? 'selected' : '';
+                                }
+                            @endphp
+                            <select name="type" id="type" value="{{ $animal->type }}">
+                                <option value="" disabled hidden>Select the animal type</option>
+                                <option {{ checkType('mammal', $animal) }} value="mammal">Mammal</option>
+                                <option {{ checkType('bird', $animal) }} value="bird">Bird</option>
+                                <option {{ checkType('reptile', $animal) }} value="reptile">Reptile</option>
+                                <option {{ checkType('amphibian', $animal) }} value="amphibian">Amphibian</option>
+                                <option {{ checkType('fish', $animal) }} value="fish">Fish</option>
+                                <option {{ checkType('invertebrate', $animal) }} value="invertebrate">Invertebrate</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-8 form-label">
                             <label>Description</label>
                             <br>
                             <textarea rows="4" cols="55" name="description" placeholder="Description for the animal. Max 256 characters.">{{ $animal->description }}</textarea>
