@@ -3,12 +3,14 @@
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
+    <br />
 @endif
 
 @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
+    <br />
 @endif
 
 <!-- Display the errors -->
@@ -27,10 +29,12 @@
     <div class="alert alert-danger">
         {{ session('danger') }}
     </div>
+    <br />
 @endif
 
 @if (session('failure'))
     <div class="alert alert-danger">
         <p>{{ \Session::get('failure') }}</p>
-    </div><br />
+    </div>
+    <br />
 @endif
