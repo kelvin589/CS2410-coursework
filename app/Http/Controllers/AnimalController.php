@@ -5,16 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class AnimalController extends Controller
 {
+    private function queryAnimalType($query, $type) 
+    {
+        $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
+
+        if (in_array($type, $types)) {
+            $query->where('type', '=', $type);
+        }
+        
+        return $query->sortable()->paginate(7);
+    }
+
+    public function listUserAdoptedAnimals(Request $request) 
+    {
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::userAdopted(Auth::id()), $request->type);
+        return view('animals.adopted', compact('animals'));
+    }
+
     /**
      * List all available animals
      */
-    public function listAvailableAnimals()
+    public function listAvailableAnimals(Request $request)
     {
-        $animals = Animal::available()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::available(), $request->type);
         return view('animals.available', compact('animals'));
     }
 
@@ -23,10 +46,12 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin-functionality');
-        $animals = Animal::joinTables()->sortable()->paginate(7);
+        // Flash current input (remember old type value for setting select tag's value)
+        $request->flash();
+        $animals = self::queryAnimalType(Animal::joinTables(), $request->type);
         return view('animals.index', compact('animals'));
     }
 
@@ -54,33 +79,43 @@ class AnimalController extends Controller
         $animal = $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
+        $images = array();
 
         // Handle image uploading
-        if ($request->hasFile('image')) {
-            // Get filename with extension
-            $filenameWithExtension = $request->file('image')->getClientOriginalName();
-            // Just get filename
-            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            // Just get extension
-            $extension = $request->file('image')->getClientOriginalExtension();
-            // Filename to store
-            $filenameToStore = $filename.'_'.time().'.'.$extension;
+        if ($request->hasFile('images')) {
+            foreach($request->images as $image) {
+                // Get filename with extension
+                $filenameWithExtension = $image->getClientOriginalName();
+                // Just get filename
+                $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                // Just get extension
+                $extension = $image->getClientOriginalExtension();
+                // Filename to store
+                $filenameToStore = $filename.'_'.time().'.'.$extension;
 
-            // Upload image
-            $path = $request->file('image')->storeAs('public/images', $filenameToStore);
+                // Upload image
+                $path = $image->storeAs('public/images', $filenameToStore);
+                // Add to images array
+                $images[] = $filenameToStore;
+            }    
         } else {
-            $filenameToStore = 'noimage.jpg';
+            $images[] = 'noimage.jpg';
         }
 
         // Create Animal object and set values from input
         $animal = new Animal();
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
-        $animal->image = $filenameToStore;
+        $animal->image = implode("|", $images);
 
         // Save Animal object
         $animal->save();
@@ -96,9 +131,8 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-        Gate::authorize('admin-functionality');
         $animal = Animal::find($id);
-        $username = User::find($animal->user_id)->name ?? "Not Adopted";
+        $username = User::find($animal->user_id)->username ?? "Not Adopted";
         return view('animals.show', compact('animal', 'username'));
     }
 
@@ -132,38 +166,47 @@ class AnimalController extends Controller
         $this->validate(request(), [
             'name' => 'required|max:255',
             'date_of_birth' => 'required|date',
+            'type' => [
+                'required', 
+                Rule::in(['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'])
+            ],
             'description' => 'sometimes|max:256',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
+        $images = array();
 
-        // Handle image uploading
-        if ($request->hasFile('image')) {
-            // Get filename with extension
-            $filenameWithExtension = $request->file('image')->getClientOriginalName();
-            // Just get filename
-            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            // Just get extension
-            $extension = $request->file('image')->getClientOriginalExtension();
-            // Filename to store
-            $filenameToStore = $filename.'_'.time().'.'.$extension;
+        if ($request->hasFile('images')) {
+            foreach($request->images as $image) {
+                // Get filename with extension
+                $filenameWithExtension = $image->getClientOriginalName();
+                // Just get filename
+                $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                // Just get extension
+                $extension = $image->getClientOriginalExtension();
+                // Filename to store
+                $filenameToStore = $filename.'_'.time().'.'.$extension;
 
-            // Upload image
-            $path = $request->file('image')->storeAs('public/images', $filenameToStore);
+                // Upload image
+                $path = $image->storeAs('public/images', $filenameToStore);
+                // Add to images array
+                $images[] = $filenameToStore;
+            }    
         } else {
-            $filenameToStore = 'noimage.jpg';
+            $images[] = 'noimage.jpg';
         }
 
         // Update the record
         $animal->name = $request->input('name');
         $animal->date_of_birth = $request->input('date_of_birth');
+        $animal->type = $request->input('type');
         $animal->description = $request->input('description');
-        $animal->image = $filenameToStore;
+        $animal->image = implode("|", $images);
 
         // Save Animal object
         $animal->save();
         // Generate a redirect HTTP response with success message
         return redirect('animals')->with('success', 'Animal has been updated');
-}
+    }
 
     /**
      * Remove the specified resource from storage.

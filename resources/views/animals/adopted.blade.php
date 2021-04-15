@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <h1 class="centre">Available Animals</h1>
+        <div class="col-md-8">
+            <h1 class="centre">Adopted Animals</h1>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
@@ -43,9 +43,8 @@
                     <tr>
                         <th>@sortablelink('name', 'Name')</th>
                         <th>@sortablelink('date_of_birth', 'Date of Birth')</th>
-                        <th>Description</th>
                         <th>Type</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,23 +52,10 @@
                     <tr>
                         <td>{{ $animal->name }}</td>
                         <td>{{ date("jS F Y", strtotime($animal->date_of_birth)) }}</td>
-                        <td width="42%">{{ $animal->description }}</td>
                         <td>{{ $animal->type }}</td>
                         <td>
                             <a href="{{ route('animals.show', ['animal' => $animal['id']]) }}" class="btn btn-blue">Details</a>
                         </td>
-                        <!-- Only show button for animals user has not requested -->
-                        @if(App\Models\Request::animalIDUserID($animal->id, Auth::id())->exists())
-                            <td>Requested</td>
-                        @else
-                            <td>
-                                <form method="POST" action="{{ route('request_adoption', ['id' => $animal['id']]) }}" enctype="multipart/form-data" >
-                                    @method('PATCH')
-                                    @csrf
-                                    <input type="submit" class="btn btn-green" name="submitButton" value="Request Adoption" />
-                                </form>
-                            </td>
-                        @endif
                     </tr>
                 @endforeach
                 </tbody>

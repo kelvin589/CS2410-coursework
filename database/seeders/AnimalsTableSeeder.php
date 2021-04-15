@@ -18,14 +18,17 @@ class AnimalsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
+
         foreach(range(1, 10) as $index) 
         {
             DB::table('animals')->insert([
                 'name'=>$faker->name,
                 'date_of_birth'=>$faker->date($format = 'Y-m-d', $max = 'now'),
-                'description'=> $faker->text($maxNbChars = 200),
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'description'=>$faker->text($maxNbChars = 200),
+                'type'=>$faker->randomElement($types),
+                'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')
             ]);
         }
     }
