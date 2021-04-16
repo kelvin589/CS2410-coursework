@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Gate;
 class RequestController extends Controller
 {
     /**
+     * Assign auth middleware to controllers actions so only authorised users are allowed.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the pending requests
      */
     public function listPending()

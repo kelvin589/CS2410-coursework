@@ -12,6 +12,14 @@ use Illuminate\Validation\Rule;
 class AnimalController extends Controller
 {
     /**
+     * Assign auth middleware to controllers actions so only authorised users are allowed.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * List the animals adopted by the logged in user
      */
     public function listUserAdoptedAnimals(Request $request) 
