@@ -176,7 +176,7 @@ class AnimalController extends Controller
         $animal_name = $animal->name;
         $animal->delete();
 
-        return redirect('animals')->with('danger', 'The animal, ' . $animal_name . ', has been deleted.');
+        return redirect('animals')->with('success', 'The animal, ' . $animal_name . ', has been deleted.');
     }
 
     /**

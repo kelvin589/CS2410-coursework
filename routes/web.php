@@ -22,10 +22,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('animals/available', 'App\Http\Controllers\AnimalController@listAvailableAnimals')->middleware('auth')->name('display_available_animals');
 Route::get('requests/pending', 'App\Http\Controllers\RequestController@listPending')->middleware('auth')->name('display_pending_requests');
+Route::get('animals/adopted', 'App\Http\Controllers\AnimalController@listUserAdoptedAnimals')->middleware('auth')->name('display_user_adopted_animals');
 
 Route::patch('requests/pending/update/{id}', 'App\Http\Controllers\RequestController@updateRequestStatus')->middleware('auth')->name('update_request_status');
 Route::patch('requests/adoption/{id}', 'App\Http\Controllers\RequestController@addAdoptionRequest')->middleware('auth')->name('request_adoption');
-Route::get('/animals/adopted', 'App\Http\Controllers\AnimalController@listUserAdoptedAnimals')->middleware('auth')->name('display_user_adopted_animals');
 
 use App\Http\Controllers\AnimalController;
 Route::resource('animals', AnimalController::class)->middleware('auth');

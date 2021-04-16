@@ -42,10 +42,10 @@
                     <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple />
                 </div>
 
-                <div class="col-md-12 col-md-offset-4">
+                <div class="col-md-8 col-md-offset-2">
                     <a href="{{ route('animals.index') }}" class="btn btn-pink" role="button">Back to the list</a>
-                    <input style="margin-left:20%;" type="submit" class="btn btn-green" />
-                    <input style="margin-left:20%;" type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to reset the form?')" />
+                    <input type="submit" class="btn btn-green" />
+                    <input type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to reset the form?')" />
                 </div>
             </form>
         </div>

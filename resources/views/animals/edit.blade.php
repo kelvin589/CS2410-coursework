@@ -1,7 +1,7 @@
 <!-- inherit master template app.blade.php -->
 @extends('layouts.app')
 
-@section('columns', '6')
+@section('columns', '7')
 @section('title', 'Edit and Update Animal')
 
 <!-- define the content section -->
@@ -33,17 +33,18 @@
                     <br />
                     <textarea rows="4" cols="55" name="description" placeholder="Description for the animal. Max 256 characters.">{{ $animal->description }}</textarea>
                 </div>
-                <div style="margin-bottom:10px;" class="col-md-12 form-label">
+                <div class="col-md-12 form-label">
                     <label>Image</label>
                     <br />
                     <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple />
-                    <h6>Current Images:</h6>
+                    <h6 style="margin-top:10px; margin-bottom:-10px;">Current Images:</h6>
                     @include('elements.carousel', ['item' => $animal])
+                    <br />
                 </div>
-                <div class="col-md-12 col-md-offset-4">
+                <div class="col-md-8 col-md-offset-2">
                     <a href="{{ url()->previous() }}" class="btn btn-pink" role="button">Back to the list</a>
-                    <input style="margin-left:20%;" type="submit" class="btn btn-green" />
-                    <input style="margin-left:20%;" type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to discard the changes?')" />
+                    <input  type="submit" class="btn btn-green" />
+                    <input type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to discard the changes?')" />
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Animal Sanctuary</title>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -52,8 +52,14 @@
 
             <main class="py-4">
                 <h1 class="centre">Animal Sanctuary</h1>
-                <h2 class="centre">Welcome to the animal sanctuary. We hope you enjoy.</h2>
-                <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;"src="https://upload.wikimedia.org/wikipedia/commons/e/e2/FarmSanctuary.JPG" alt="" />          
+                <h2 class="centre">Welcome to the animal sanctuary.</h2>
+                <img style="display: block; margin-left: auto; margin-right: auto; width: 35%;"src="{{ asset('assets/welcome.png') }}" alt="welcome.png" />   
+                <br />
+                <h4 style="margin: 0px 60px;">After registering you will be able to view all the available animals for adoption.
+                    You can view information about the animal, such as their name and a description.
+                    You will then be able to request an animal for adoption. Your adoption request will be
+                    checked by a staff member, after which it will be accepted or denied.
+                </h4>       
             </main>
         </div>
     </body>
