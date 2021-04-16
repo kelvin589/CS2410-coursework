@@ -33,7 +33,7 @@
                     <br />
                     <textarea rows="4" cols="55" name="description" placeholder="Description for the animal. Max 256 characters.">{{ $animal->description }}</textarea>
                 </div>
-                <div style="margin-bottom:10px;" class="col-md-12 form-label">
+                <div class="col-md-12 form-label">
                     <label>Image</label>
                     <br />
                     <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple />
