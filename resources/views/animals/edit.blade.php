@@ -1,7 +1,7 @@
 <!-- inherit master template app.blade.php -->
 @extends('layouts.app')
 
-@section('columns', '6')
+@section('columns', '7')
 @section('title', 'Edit and Update Animal')
 
 <!-- define the content section -->
@@ -37,13 +37,14 @@
                     <label>Image</label>
                     <br />
                     <input type="file" accept="image/*" name="images[]" placeholder="Image file" multiple />
-                    <h6>Current Images:</h6>
+                    <h6 style="margin-top:10px; margin-bottom:-10px;">Current Images:</h6>
                     @include('elements.carousel', ['item' => $animal])
+                    <br />
                 </div>
                 <div class="col-md-12 col-md-offset-4">
                     <a href="{{ url()->previous() }}" class="btn btn-pink" role="button">Back to the list</a>
-                    <input style="margin-left:20%;" type="submit" class="btn btn-green" />
-                    <input style="margin-left:20%;" type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to discard the changes?')" />
+                    <input style="margin-left:27%;" type="submit" class="btn btn-green" />
+                    <input style="margin-left:27%;" type="reset" class="btn btn-red" onclick="return confirm('Are you sure you want to discard the changes?')" />
                 </div>
             </form>
         </div>
