@@ -1,9 +1,15 @@
 <div id="imageCarousel" class="carousel slide" data-interval="false">
     <div class="carousel-inner">
         <!-- There must be one active carousel item -->
-        <div class="carousel-item active" style="height:360px;">
-            <img class="d-block w-100" src="{{ asset('storage/images/noimage.jpg') }}" alt="noimage.jpg" />
-        </div>
+        @if($item->image == "noimage.jpg")
+            <div class="carousel-item active" style="height:360px;">
+                <img class="d-block w-100" src="{{ asset('storage/images/noimage.jpg') }}" alt="noimage.jpg" />
+            </div>
+        @else
+            <div class="carousel-item active" style="height:360px;">
+                <img class="d-block w-100" src="{{ asset('storage/images/imageavailable.jpg') }}" alt="imageavailable.jpg" />
+            </div>
+        @endif
         @foreach(explode("|", $item->image) as $image)
             <div class="carousel-item " style="height:360px;">
                 <img class="d-block w-100" src="{{ asset('storage/images/'.$image) }}" alt="{{ $image }}" />
