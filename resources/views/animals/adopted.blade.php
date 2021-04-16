@@ -2,10 +2,12 @@
 
 @section('columns', '8')
 @section('title', 'Adopted Animals')
-@include('elements.session_alerts')
 
 @section('content')
-    @include('elements.select_animal_type')
+    @include('elements.session_alerts')
+    <form>
+        @include('elements.select_animal_type', ['type' => old('type'), 'onchange' => 'this.form.submit()', 'showall' => true])
+    </form>
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
             <tr>

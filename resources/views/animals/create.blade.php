@@ -3,10 +3,10 @@
 
 @section('columns', '6')
 @section('title', 'Add Animal')
-@include('elements.session_alerts')
 
 <!-- define the content section -->
 @section('content')
+    @include('elements.session_alerts')
     <div style="background-color:#FCD5CE" class="card">
         <!-- Define the form -->
         <div class="card-body">
@@ -27,15 +27,7 @@
                 <div class="col-md-8 form-label">
                     <label>Type</label>
                     <br />
-                    <select name="type" id="type">
-                        <option value="" selected disabled hidden>Select the animal type</option>
-                        <option value="mammal">Mammal</option>
-                        <option value="bird">Bird</option>
-                        <option value="reptile">Reptile</option>
-                        <option value="amphibian">Amphibian</option>
-                        <option value="fish">Fish</option>
-                        <option value="invertebrate">Invertebrate</option>
-                    </select>
+                    @include('elements.select_animal_type', ['type' => '', 'onchange' => '', 'showall' => false])
                 </div>
 
                 <div class="col-md-8 form-label">

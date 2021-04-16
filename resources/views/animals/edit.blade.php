@@ -3,10 +3,10 @@
 
 @section('columns', '6')
 @section('title', 'Edit and Update Animal')
-@include('elements.session_alerts')
 
 <!-- define the content section -->
 @section('content')
+    @include('elements.session_alerts')
     <div style="background-color:#FCD5CE" class="card">
         <!-- Define the form -->
         <div class="card-body">
@@ -26,7 +26,7 @@
                 <div class="col-md-8 form-label">
                     <label>Type</label>
                     <br />
-                    @include('elements.select_animal_type')
+                    @include('elements.select_animal_type', ['type' => $animal->type, 'onchange' => '', 'showall' => false])
                 </div>
                 <div class="col-md-8 form-label">
                     <label>Description</label>
