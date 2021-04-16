@@ -5,7 +5,7 @@
 
 @section('content')
     @include('elements.session_alerts')
-    @include('elements.select_animal_type')
+    @include('elements.select_animal_type', ['type' => old('type')])
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead> 
             <tr>
