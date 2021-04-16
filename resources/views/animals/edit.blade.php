@@ -26,7 +26,7 @@
                 <div class="col-md-8 form-label">
                     <label>Type</label>
                     <br />
-                    @include('elements.select_animal_type', ['type' => $animal->type, 'onchange' => ''])
+                    @include('elements.select_animal_type', ['type' => $animal->type, 'onchange' => '', 'showall' => false])
                 </div>
                 <div class="col-md-8 form-label">
                     <label>Description</label>

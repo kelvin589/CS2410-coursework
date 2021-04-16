@@ -6,7 +6,7 @@
 @section('content')
     @include('elements.session_alerts')
     <form>
-        @include('elements.select_animal_type', ['type' => old('type'), 'onchange' => 'this.form.submit()'])
+        @include('elements.select_animal_type', ['type' => old('type'), 'onchange' => 'this.form.submit()', 'showall' => true])
     </form>
     <table class="table table-striped table-bordered table-hover table-pink">
         <thead>

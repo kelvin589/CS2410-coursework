@@ -6,7 +6,9 @@
 @endphp
 <select name="type" id="type" onchange='{{ $onchange }}'>
     <option value="" selected disabled hidden>Select the animal type</option>
-    <option {{ checkType('all', $type) }} value="all">All</option>
+    @if($showall)
+        <option {{ checkType('all', $type) }} value="all">All</option>
+    @endif
     <option {{ checkType('mammal', $type) }} value="mammal">Mammal</option>
     <option {{ checkType('bird', $type) }} value="bird">Bird</option>
     <option {{ checkType('reptile', $type) }} value="reptile">Reptile</option>
