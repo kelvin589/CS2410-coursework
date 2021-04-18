@@ -21,7 +21,7 @@ class Request extends Model
     }
 
     /**
-     * Get the user that associated with the request
+     * Get the user associated with the request
      */
     public function user()
     {
@@ -65,7 +65,7 @@ class Request extends Model
     }
 
     /**
-     * Scope a query to only include records with a certain animal_id.
+     * Scope a query to only include records with a certain user_id.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder

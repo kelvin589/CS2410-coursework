@@ -19,14 +19,16 @@ class AnimalsTableSeeder extends Seeder
     {
         $faker = Faker::create();
         $types = ['mammal', 'bird', 'reptile', 'amphibian', 'fish', 'invertebrate'];
+        $images = [];
 
         foreach(range(1, 10) as $index) 
         {
             DB::table('animals')->insert([
                 'name'=>$faker->name,
                 'date_of_birth'=>$faker->date($format = 'Y-m-d', $max = 'now'),
-                'description'=>$faker->text($maxNbChars = 200),
+                'description'=>$faker->text($maxNbChars = 256),
                 'type'=>$faker->randomElement($types),
+                'image'=>'noimage.jpg',
                 'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')
             ]);
