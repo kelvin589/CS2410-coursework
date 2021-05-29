@@ -9,8 +9,15 @@ University coursework to develop an animal sanctuary website using Laravel and M
 * [Setup](#setup)
 
 ## Introduction
-This project was created for University coursework. This project entailed designing and developing a three-tier dynamic database-driven web application for animal adoptions. This could have been created using any server-side and front-end technologies, as long as you know how to use them. Various technologies were taught for the module, including: Node.js, MongoDB, Mongoose ODM, PHP 8, PDO, HTML, Composer, Laravel, Blade, Eloquent. I chose to go the Laravel/Blade/Eloquent route, with MySQL database.  
-A link to the website:
+This project was created for University coursework. This project entailed designing and developing a three-tier dynamic database-driven web application for animal adoptions. This could have been created using any server-side and front-end technologies, as long as you know how to use them. Various technologies were taught for the module, including: Node.js, MongoDB, Mongoose ODM, PHP 8, PDO, HTML, Composer, Laravel, Blade, Eloquent. I chose to go the Laravel route with MySQL database.  
+
+The project has been deployed to Heroku and can be accessed [here](https://mysterious-dusk-05193.herokuapp.com), using the following login details:
+* Admin User
+    * Username: admin@sanctuary.com
+    * Password: 12345678
+* Normal User
+    * Username: Lincoln@Bartell.com
+    * Password: 12345678
 
 ## Features
 I have included all the features and stretchers specified in the brief:
