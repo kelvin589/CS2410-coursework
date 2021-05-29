@@ -59,23 +59,73 @@ I have included all the features and stretchers specified in the brief, of which
   * Allow different animal types and support listing of animals of a selected type
 
 ## Possible Improvements
-* UI design
+* UI design overhaul
 * Sorting for all table headings (namely, those that used table joins)
+* Extra details for users and animals to make it a more usable and useful application
+* Testing the application
+* Security improvements
+* User account management for administrators and users
+* Usability features
 
 ## Technologies
 This project was created using:
 * Laravel Framework 8.37.0
 * XAMPP 8.0.2-0
 * PHP 8.0.1
+* Composer 2.0.8
+* NPM 6.14.4
 * [Kyslik/column-sortable 6.4](https://github.com/Kyslik/column-sortable)
 
 ## Setup
 To run this project:
-1. Fork this project to add it to your own github account
-2. Download the project or clone the project to get a local copy
-3. Install dependencies composer install
-4. Run XAMPP MySQL Database
-5. Run migrations 
-6. start server php artisan serve
-7. If you want to develop, put it in development mode
-8. 
+1. Make sure to install PHP 8, Composer and XAMPP
+2. Fork this project to add it to your own github account
+3. Clone the project to get a local copy
+``` bash
+git clone https://github.com/kelvin589/animal-sanctuary
+```
+5. cd into the project folder
+``` bash
+cd animal-sanctuary
+```
+6. Install composer dependencies
+``` bash
+composer install
+```
+6. Install NPM dependencies
+``` bash
+npm install
+```
+6. Create a copy of the template .env.example file and name it .env
+``` bash
+cp .env.example .env
+```
+6. Generate application key
+``` bash
+php artisan key:generate
+```
+8. Run MySQL Database in XAMPP
+9. Create a database 
+10. Update the .env file with details to access the database
+``` bash
+DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, and DB_PASSWORD
+```
+12. Run migrations
+``` bash
+php artisan migrate
+```
+14. Seed the database
+``` bash
+php artisan db:seed
+```
+16. Create a symbolic link from public/storage to storage/app/public to store publically accessible files (in this case, animal images)
+``` bash
+php artisan storage:link
+```
+18. Run the server
+``` bash
+php artisan serve
+```
+18. Finished! You should be able to see the website running.
+
+Extra commands which may be useful:
