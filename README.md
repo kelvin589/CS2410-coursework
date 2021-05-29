@@ -118,7 +118,7 @@ php artisan migrate
 ``` bash
 php artisan db:seed
 ```
-16. Create a symbolic link from public/storage to storage/app/public to store publically accessible files (in this case, animal images)
+16. Create a symbolic link from public/storage to storage/app/public to store publically accessible files (in this case, animal images). This is not necessary, however; animal images will not work properly without it.
 ``` bash
 php artisan storage:link
 ```
