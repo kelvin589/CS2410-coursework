@@ -13,15 +13,50 @@ This project was created for University coursework. This project entailed design
 
 The project has been deployed to Heroku and can be accessed [here](https://mysterious-dusk-05193.herokuapp.com), using the following login details:
 * Admin User
-    * Username: admin@sanctuary.com
-    * Password: 12345678
+  * Username: admin@sanctuary.com
+  * Password: 12345678
 * Normal User
-    * Username: Lincoln@Bartell.com
-    * Password: 12345678
+  * Username: Lincoln@Bartell.com
+  * Password: 12345678
 
 ## Features
-I have included all the features and stretchers specified in the brief:
-* Users
+I have included all the features and stretchers specified in the brief, of which include:
+* Database
+  * Database to store users, animals and adoption requests with proper relations and constraints
+  * Users should have a username and password, and any other relevant information
+  * Animals should have a name, date of birth, description, picture and availability, and any other relevant information
+  * One user can adopt multiple animals
+  * One animal can only be adopted by one user
+  * Multiple users can make their own adoption request to the same animal
+  * Staff members can choose which adoption requests get approved
+* Interface Design
+  * Easy and convenient to use
+  * Readable with appropriate text font, size, colour and background colour
+  * Descriptive links
+  * Output and information has adequate descriptive text and a neat, clear format
+* Functional Requirements
+  * Public users can:
+    * Register a new account
+    * Login with a home page showing a list of animals available for adoption
+    * Make an adoption request
+    * View all their adoption requests and the status of the request (approved, denied or pending)
+  * Staff users can:
+    * Login with a home page showing a list of all pending adoption requests
+    * Approve or deny an adoption request
+    * Add a new animal to the system, listed as available for adoption
+    * See a list of all animals in the system and show who owns each of them (if they have been adopted)
+    * View all adoption requests made by all users and the status of the request (approved, denied or pending) 
+* Security
+  * Authentication/authorisation
+  * Form validation
+  * Handling injections (SQL/HTML)
+  * Password hashing
+  * Restricting file upload to only images
+  * Preventing Cross-site Request Forgery
+* Stretchers
+  * Allow for the displaying tables to be sorted based on headings
+  * Allow an animal to have multiple pictures
+  * Allow different animal types and support listing of animals of a selected type
 
 ## Possible Improvements
 * UI design
