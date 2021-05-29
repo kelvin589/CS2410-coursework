@@ -1,5 +1,5 @@
 # To-do List
-University coursework to develop an animal sanctuary website
+University coursework to develop an animal sanctuary website using Laravel and MySQL database
 
 ## Table of Contents
 * [Introduction](#introduction)
