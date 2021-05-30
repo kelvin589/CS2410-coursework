@@ -77,7 +77,7 @@ This project was created using:
 * [Kyslik/column-sortable 6.4](https://github.com/Kyslik/column-sortable)
 
 ## Setup
-To run this project:
+### Running the Project
 1. Make sure to install PHP 8, Composer and XAMPP
 2. Fork this project to add it to your own github account
 3. Clone the project to get a local copy
@@ -128,4 +128,36 @@ php artisan serve
 ```
 18. Finished! You should be able to see the website running.
 
+### Developing the Project
+If you want to develop this application further, update the application settings in the .env file
+* If you want to show error details during local development (This should be false for a production environment as you may expose sensitive configuration information)
+```
+APP_DEBUG=true
+```
+* Set the current environment as development
+```
+APP_ENV=development
+```
+
+### Useful Commands
 Extra commands which may be useful:
+* Make sure you run this after updating the .env
+``` bash
+php artisan config:clear
+```
+* To clear the cache
+``` bash
+php artisan cache:clear
+```
+* To enable maintenance mode
+``` bash
+php artisan down
+```
+* To disable maintenance mode
+``` bash
+php artisan up
+```
+* Update dependencies
+``` bash
+composer update
+```
